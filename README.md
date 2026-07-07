@@ -2,6 +2,10 @@
 
 **Live estimates of Belgian real-estate prices — for both _buying_ and _renting_ — served by a FastAPI + Docker backend and a Streamlit web app.**
 
+> ### 🚀 [**Try the live app →**](https://immo-eliza-deployment-trtrvzpqjymmxhf9bzuhbu.streamlit.app/)
+> The Streamlit web app is deployed on **Streamlit Community Cloud**:
+> <https://immo-eliza-deployment-trtrvzpqjymmxhf9bzuhbu.streamlit.app/>
+
 This repository is the *deployment* half of the Immo Eliza project. It takes the
 best model from the [machine-learning phase](#-the-model) — a **tuned XGBoost**
 regressor — and puts it behind:
@@ -249,6 +253,9 @@ versions, and honours Render's `$PORT`.
 2. Add the API URL as an environment variable / secret `IMMO_API_URL`
    (your Render URL). Leave it unset to run on the bundled model.
 3. Deploy. Streamlit picks up [`streamlit/requirements.txt`](streamlit/requirements.txt).
+
+> **✅ Live:** this app is deployed at
+> <https://immo-eliza-deployment-trtrvzpqjymmxhf9bzuhbu.streamlit.app/>
 
 ---
 
