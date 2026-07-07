@@ -1,0 +1,15 @@
+# Streamlit Community Cloud picks up this file for the frontend deployment.
+# Kept in sync with the training-time model versions so the bundled joblib
+# pipelines load cleanly when the app runs in local-model (offline) mode.
+# Python 3.13.
+
+streamlit==1.41.1
+requests==2.32.3
+
+# needed to load & score the bundled model locally (offline fallback)
+scikit-learn==1.8.0
+xgboost==3.3.0
+joblib==1.5.3
+pandas==2.2.3
+numpy==2.2.3
+scipy==1.17.0

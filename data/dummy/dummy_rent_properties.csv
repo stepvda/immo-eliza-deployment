@@ -1,0 +1,11 @@
+description,livable_surface,bedrooms,bathrooms,toilets,build_year,facades,number_of_floors,primary_energy_consumption,land_surface,latitude,longitude,nearest_city_distance_km,property_type,province,region,epc,building_state,kitchen_equipment,heating_type,new_construction,furnished,terrace,garden,swimming_pool,elevator,cellar,solar_panels,air_conditioning,has_parking
+Brussels furnished 1-bed near city centre,60,1,1,1,2010,2,1,250,,50.846,4.352,1,flat,Brussels,Brussels,C,Normal,Fully equipped,Gas,0,1,1,0,0,1,0,0,0,0
+Antwerp 2-bed apartment with parking,90,2,1,1,2000,2,1,250,,51.21,4.41,3,flat,Antwerp,Flanders,C,Normal,Fully equipped,Gas,0,0,1,0,0,1,0,0,0,1
+Ghent furnished student studio,30,0,1,1,2019,2,1,160,,51.05,3.72,1,flatStudio,East Flanders,Flanders,B,New,Super equipped,Electricity,0,1,0,0,0,1,0,0,0,0
+Walloon Brabant family house to let,180,4,2,2,2005,4,2,250,600.0,50.69,4.45,6,house,Walloon Brabant,Wallonia,C,Excellent,Fully equipped,Gas,0,0,0,1,0,0,1,0,0,1
+Liege budget one-bed flat,55,1,1,1,1970,2,1,450,,50.63,5.57,2,flat,Liège,Wallonia,E,Normal,Partially equipped,Electricity,0,0,0,0,0,0,0,0,0,0
+Knokke furnished coastal apartment,80,2,1,1,2016,2,1,160,,51.34,3.28,1,flat,West Flanders,Flanders,B,Excellent,Super equipped,Gas,0,1,1,0,0,1,0,0,0,1
+"Brussels luxury penthouse, fully furnished",150,3,2,2,2018,2,1,85,,50.83,4.36,2,penthouse,Brussels,Brussels,A,Excellent,Super equipped,Gas,0,1,1,0,0,1,0,0,1,1
+Hasselt suburban house with garden,140,3,1,2,1995,3,2,350,400.0,50.93,5.34,4,house,Limburg,Flanders,D,Normal,Fully equipped,Gas,0,0,0,1,0,0,1,0,0,1
+Namur small older house to renovate,110,2,1,1,1960,2,2,530,200.0,50.45,4.87,5,house,Namur,Wallonia,F,To renovate,Not equipped,Fuel oil,0,0,0,1,0,0,0,0,0,0
+Leuven furnished duplex near campus,75,2,1,1,2012,2,2,160,,50.88,4.7,1,duplex,Flemish Brabant,Flanders,B,Normal,Fully equipped,Gas,0,1,1,0,0,0,0,0,0,0

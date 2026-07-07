@@ -1,0 +1,11 @@
+description,livable_surface,bedrooms,bathrooms,toilets,build_year,facades,number_of_floors,primary_energy_consumption,land_surface,latitude,longitude,nearest_city_distance_km,property_type,province,region,epc,building_state,kitchen_equipment,heating_type,new_construction,furnished,terrace,garden,swimming_pool,elevator,cellar,solar_panels,air_conditioning,has_parking
+Brussels 2-bed apartment near EU quarter,85,2,1,1,2005,2,1,250,,50.842,4.38,2,flat,Brussels,Brussels,C,Normal,Fully equipped,Gas,0,0,1,0,0,1,1,0,0,1
+Antwerp characterful townhouse to renovate,165,3,1,2,1935,2,3,350,120.0,51.21,4.41,3,house,Antwerp,Flanders,D,To renovate,Partially equipped,Gas,0,0,0,1,0,0,1,0,0,0
+Ghent new-build energy-efficient flat,95,2,1,1,2022,2,1,85,,51.05,3.72,2,flat,East Flanders,Flanders,A,New,Super equipped,Gas,1,0,1,0,0,1,0,1,0,1
+Walloon Brabant detached villa with pool,280,4,2,3,2008,4,2,160,1200.0,50.69,4.45,6,villa,Walloon Brabant,Wallonia,B,Excellent,Super equipped,Gas,0,0,0,1,1,0,1,0,0,1
+"Liege terraced house, older stock",130,3,1,1,1950,2,3,530,110.0,50.63,5.57,3,house,Liège,Wallonia,F,To be renovated,Not equipped,Fuel oil,0,0,0,0,0,0,1,0,0,0
+Knokke coastal penthouse with sea terrace,140,3,2,2,2015,2,1,160,,51.34,3.28,1,penthouse,West Flanders,Flanders,B,Excellent,Super equipped,Gas,0,0,1,0,0,1,0,0,1,1
+Charleroi budget two-bed flat,70,2,1,1,1975,2,1,450,,50.41,4.44,2,flat,Hainaut,Wallonia,E,Normal,Fully equipped,Electricity,0,0,0,0,0,0,0,0,0,0
+Namur countryside family house with garden,200,4,2,2,1990,3,2,350,900.0,50.45,4.87,8,house,Namur,Wallonia,D,Normal,Fully equipped,Fuel oil,0,0,0,1,0,0,1,0,0,1
+Leuven compact new studio,35,0,1,1,2018,2,1,160,,50.88,4.7,1,flatStudio,Flemish Brabant,Flanders,B,New,Super equipped,Gas,0,0,0,0,0,1,0,0,0,0
+"Luxembourg province rural villa, large plot",250,5,2,3,1998,4,2,450,2000.0,49.913,5.515,15,villa,Luxembourg,Wallonia,E,Normal,Fully equipped,Wood,0,0,0,1,0,0,1,0,0,1

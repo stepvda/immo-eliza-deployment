@@ -1,0 +1,29 @@
+# Immo Eliza deployment — full dev/runtime dependencies.
+# Covers BOTH the FastAPI backend and the Streamlit frontend, plus test tooling.
+# For the slim API-only Docker image, see api/requirements.txt.
+# For the Streamlit Cloud deployment, see streamlit/requirements.txt.
+# Pinned to the versions the models were trained with (scikit-learn 1.8.0 /
+# xgboost 3.3.0) so the joblib pipelines load cleanly. Python 3.13.
+#
+# macOS note: XGBoost needs the OpenMP runtime -> `brew install libomp`.
+
+# --- model / data ---
+scikit-learn==1.8.0
+xgboost==3.3.0
+joblib==1.5.3
+pandas==2.2.3
+numpy==2.2.3
+scipy==1.17.0
+
+# --- API (FastAPI) ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+
+# --- frontend (Streamlit) ---
+streamlit==1.41.1
+requests==2.32.3
+
+# --- tests ---
+pytest==8.3.4
+httpx==0.28.1

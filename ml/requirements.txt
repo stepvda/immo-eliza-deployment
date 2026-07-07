@@ -1,0 +1,10 @@
+# Immo Eliza ML — pinned to the versions used to build the project.
+# Python 3.13
+pandas==2.2.3
+numpy==2.2.3
+scikit-learn==1.8.0
+xgboost==3.3.0
+joblib==1.5.3
+scipy==1.17.0
+
+# Note: on macOS, xgboost needs the OpenMP runtime:  brew install libomp

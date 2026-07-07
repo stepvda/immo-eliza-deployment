@@ -1,0 +1,17 @@
+# Immo Eliza API — runtime deps for the FastAPI service (Docker image).
+# Pinned to the versions the models were trained with so the joblib pickles
+# (scikit-learn 1.8.0 / xgboost 3.3.0 pipelines) load without warnings.
+# Python 3.13
+
+# --- model / data ---
+scikit-learn==1.8.0
+xgboost==3.3.0
+joblib==1.5.3
+pandas==2.2.3
+numpy==2.2.3
+scipy==1.17.0
+
+# --- web API ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4

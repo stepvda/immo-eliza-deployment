@@ -1,0 +1,13 @@
+# Keep the image lean — only ship code + model artifacts.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+*.log
+.DS_Store
+tests/
+README.md

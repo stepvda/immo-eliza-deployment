@@ -1,0 +1,17 @@
+# Render Blueprint — one-click deploy of the Immo Eliza API.
+# https://render.com/docs/blueprint-spec
+#
+# In the Render dashboard: New + -> Blueprint -> point it at this repo.
+# Render builds api/Dockerfile and exposes the service on $PORT automatically.
+services:
+  - type: web
+    name: immo-eliza-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: ./api
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
