@@ -197,6 +197,20 @@ def geocode_search(query: str) -> list[tuple[str, str]]:
         return []
 
 
+@st.cache_data(show_spinner=False)
+def dataset_stats() -> dict:
+    """Per-market training size + comparables-pool size, for display in the UI."""
+    eng, comp = _engine(), _comparables()
+    out = {}
+    for m in ("sale", "rent"):
+        try:
+            pool = comp.pool_size(m)
+        except Exception:  # noqa: BLE001
+            pool = None
+        out[m] = {"train": eng.TRAIN_COUNTS.get(m), "pool": pool}
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # Helpers
 # --------------------------------------------------------------------------- #
@@ -253,6 +267,12 @@ with st.sidebar:
         "### 🧠  The model\n**Tuned XGBoost** over a 30-feature pipeline that now "
         "includes a **neighbourhood-priciness** feature — the €/m² percentile of the "
         "exact address, from an adaptive spatial surface built on real listings.")
+    _stats = dataset_stats()
+    st.markdown("### 📊  Data")
+    st.markdown(
+        f"- **Trained on** {_stats['sale']['train']:,} sale + {_stats['rent']['train']:,} rent listings\n"
+        f"- **Comparables pool** (real listings to draw similar properties from): "
+        f"{_stats['sale']['pool']:,} sale · {_stats['rent']['pool']:,} rent")
     st.caption("Immo Eliza · educational project · estimates, not valuations.")
 
 
@@ -471,7 +491,9 @@ def render_map(features: dict, market: str, comps: list[dict]) -> None:
 
 
 def render_comparables(comps: list[dict], market: str) -> None:
-    st.markdown("###### 🏘️ Five similar properties nearby")
+    pool = dataset_stats().get(market, {}).get("pool")
+    pool_txt = f" (from {pool:,} {market} listings)" if pool else ""
+    st.markdown(f"###### 🏘️ Five similar properties nearby{pool_txt}")
     if not comps:
         st.caption("No comparable listings found in range.")
         return
@@ -486,8 +508,19 @@ def render_comparables(comps: list[dict], market: str) -> None:
             "Where": c.get("locality") or c.get("municipality") or "—",
             "EPC": c.get("epc") or "—",
             "Distance": f"{c.get('distance_km','—')} km",
+            "Listing": c.get("url") or None,   # clickable link to the source site
         })
-    st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+    st.dataframe(
+        pd.DataFrame(rows), use_container_width=True, hide_index=True,
+        column_config={
+            "Listing": st.column_config.LinkColumn(
+                "Listing", display_text="Open ↗",
+                help="Open the property on the source immo site (Immoweb / Immovlan)."),
+        },
+    )
+    if not any(c.get("url") for c in comps):
+        st.caption("↳ Source links appear as the scraped Immoweb/Immovlan listings "
+                   "grow the comparables pool (the original seed listings have no URL).")
 
 
 # --------------------------------------------------------------------------- #

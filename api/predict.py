@@ -76,6 +76,12 @@ MODEL_METRICS: dict[str, dict[str, float]] = {
     "rent": {"r2": 0.7376, "mae": 203.3,   "rmse": 483.3},
 }
 
+# Number of listings each market's model was trained on (the training split of
+# the enlarged, de-duplicated store). Refreshed on every retrain alongside
+# MODEL_METRICS; surfaced in the UI. The comparables *pool* (all usable listings
+# similar properties are drawn from) is reported live via ``similar.pool_size``.
+TRAIN_COUNTS: dict[str, int] = {"sale": 18662, "rent": 9130}
+
 ALGORITHM = "XGBoost (tuned)"
 
 

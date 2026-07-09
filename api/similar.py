@@ -47,6 +47,11 @@ OUT_COLS = [
 ]
 
 
+def pool_size(market: str) -> int:
+    """Number of usable listings the comparables for ``market`` are drawn from."""
+    return int(len(_listings(market)))
+
+
 @functools.lru_cache(maxsize=None)
 def _listings(market: str) -> pd.DataFrame:
     path = os.path.join(LISTINGS_DIR, f"{market}.parquet")

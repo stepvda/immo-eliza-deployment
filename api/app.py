@@ -249,8 +249,19 @@ def schema() -> dict[str, Any]:
 
 @app.get("/metrics", tags=["meta"])
 def metrics() -> dict[str, Any]:
-    """Held-out test-set metrics of the shipped (tuned XGBoost) models."""
-    return {"model": engine.ALGORITHM, "markets": engine.MODEL_METRICS}
+    """Held-out test-set metrics, training sizes and comparables-pool sizes."""
+    pools = {}
+    for market in MARKETS:
+        try:
+            pools[market] = comparables.pool_size(market)
+        except Exception:  # noqa: BLE001 - pool is optional metadata
+            pools[market] = None
+    return {
+        "model": engine.ALGORITHM,
+        "markets": engine.MODEL_METRICS,
+        "train_counts": engine.TRAIN_COUNTS,
+        "pool_sizes": pools,
+    }
 
 
 @app.post("/predict", response_model=PredictionResponse, tags=["predict"])
