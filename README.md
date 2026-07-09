@@ -40,7 +40,7 @@ New API routes: `POST /explain`, `POST /similar`, `GET /priciness` (+ `/pricines
 | | |
 |---|---|
 | 🏠🔑 **Two markets, shared inputs** | Predict **sale prices** *and* **monthly rents** for the same property — describe it once, switch tabs, both stay filled. |
-| 🧠 **Best model shipped** | Tuned **XGBoost** over a 30-feature pipeline (Sale R² **0.81**, Rent R² **0.62**; honest spatial-CV R² **0.78 / 0.67** on unseen neighbourhoods). |
+| 🧠 **Best model shipped** | Tuned **XGBoost** over a 30-feature pipeline, trained on an enlarged de-duplicated store (**~24k sale / ~11.7k rent**: seed + scraped Immovlan/Immoweb). Sale **R² 0.79 · MAE €76k**, Rent **R² 0.74 · MAE €203/mo** (typical error lower than the small-data model on both; honest spatial-CV R² **0.76 / 0.68** on unseen neighbourhoods). |
 | ⚡ **Self-contained pipeline** | Each artifact is a full scikit-learn `Pipeline` — pricing a home is one `pipeline.predict()` call, preprocessing included. |
 | 🔌 **Clean REST API** | `GET /` liveness, `POST /predict`, `POST /predict/batch`, plus `/schema`, `/metrics`, `/health` — with auto-generated Swagger docs. |
 | 🖥️ **Polished web app** | Gradient hero, live confidence bands, model-quality chips, a location map, and a model leaderboard. |

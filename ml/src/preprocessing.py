@@ -52,8 +52,24 @@ RAW_PATHS = {
     "sale": os.path.join(PROJECT_ROOT, "data", "in", "cleaned_sale_properties.csv"),
     "rent": os.path.join(PROJECT_ROOT, "data", "in", "cleaned_rent_properties.csv"),
 }
+# The canonical, de-duplicated listings store (seed + scraped Immovlan/Immoweb),
+# grown by the scraper. When present it is the preferred training source — this
+# is the "scrape → merge → train" link. Falls back to the original cleaned CSVs.
+LISTINGS_PATHS = {
+    "sale": os.path.join(REPO_ROOT, "data", "listings", "sale.parquet"),
+    "rent": os.path.join(REPO_ROOT, "data", "listings", "rent.parquet"),
+}
 TRAIN_DIR = os.path.join(PROJECT_ROOT, "data", "training")
 TEST_DIR = os.path.join(PROJECT_ROOT, "data", "test")
+
+
+def load_raw(market: str) -> pd.DataFrame:
+    """Load the raw training source for a market — the merged canonical listings
+    parquet if it exists, otherwise the original cleaned CSV."""
+    parquet = LISTINGS_PATHS[market]
+    if os.path.exists(parquet):
+        return pd.read_parquet(parquet)
+    return pd.read_csv(RAW_PATHS[market])
 
 TARGET = "price"
 RANDOM_STATE = 42
@@ -287,7 +303,7 @@ def add_neighbourhood_index(df: pd.DataFrame, market: str,
 
 def process_market(market: str) -> dict:
     """Clean one market, split train/test, save the cleaned splits to disk."""
-    raw = pd.read_csv(RAW_PATHS[market])
+    raw = load_raw(market)
     cleaned = clean_data(raw, market)
     # Attach the neighbourhood-priciness feature from the exact coordinates
     # (leave-one-out so a row never sees its own price).

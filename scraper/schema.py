@@ -101,6 +101,11 @@ _FLOAT_COLS = [
     *[c for c in NUMERIC], "price", "price_per_sqm",
 ]
 
+# The NIS crosswalk spells two provinces differently from the model's contract
+# (api/features.py). Normalise so scraped rows share the app's province vocabulary
+# (otherwise their province one-hot silently encodes as "unknown").
+_PROVINCE_FIX = {"Brussels-Capital": "Brussels", "Liege": "Liège"}
+
 
 def _clean_str(v) -> str | None:
     """Normalise a scalar to a clean string (int-valued floats lose the ``.0``)."""
@@ -124,6 +129,7 @@ def canonicalize_frame(df: pd.DataFrame) -> pd.DataFrame:
     df = df.reindex(columns=CANONICAL_COLUMNS)
     for c in _STRING_COLS:
         df[c] = df[c].map(_clean_str).astype("object")
+    df["province"] = df["province"].replace(_PROVINCE_FIX)
     for c in _INT_COLS:
         df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
     for c in _FLOAT_COLS:

@@ -66,13 +66,14 @@ MODEL_FILES: dict[str, str] = {
 # immo-eliza-ml/models/evaluation_results.csv). Used to build a plausible
 # confidence band around each point estimate and to surface model quality
 # through the API. MAE = typical euro miss; R2 = share of variance explained.
-# Head-line tuned-XGBoost metrics on the held-out test set, for the 30-feature
-# pipeline that now includes the neighbourhood-priciness feature (from
-# ml/models/evaluation_results.csv). Accuracy is on par with the pre-priciness
-# model; the feature's payoff is exact-address pricing, the heatmap and SHAP.
+# Head-line tuned-XGBoost metrics on the held-out test set (from
+# ml/models/evaluation_results.csv). Trained on the enlarged, de-duplicated
+# store (~24k sale / ~11.7k rent: seed + scraped Immovlan/Immoweb) with the
+# 30-feature pipeline incl. neighbourhood priciness. Typical error (MAE) is
+# lower than the smaller-data model on both markets; rent improved markedly.
 MODEL_METRICS: dict[str, dict[str, float]] = {
-    "sale": {"r2": 0.8108, "mae": 81854.9, "rmse": 185185.8},
-    "rent": {"r2": 0.6215, "mae": 255.49,  "rmse": 663.66},
+    "sale": {"r2": 0.7854, "mae": 75891.3, "rmse": 187735.1},
+    "rent": {"r2": 0.7376, "mae": 203.3,   "rmse": 483.3},
 }
 
 ALGORITHM = "XGBoost (tuned)"
