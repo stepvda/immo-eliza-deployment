@@ -21,7 +21,7 @@ uvicorn[standard]==0.34.0
 pydantic==2.10.4
 
 # --- frontend (Streamlit) ---
-streamlit==1.41.1
+streamlit==1.54.0
 requests==2.32.3
 pydeck==0.9.3                 # priciness heatmap (deck.gl) + map pins
 altair==5.5.0                # SHAP + ROI charts
