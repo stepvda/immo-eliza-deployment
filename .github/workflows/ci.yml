@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build API Docker image
-        run: docker build -t immo-eliza-api ./api
+        run: docker build -f api/Dockerfile -t immo-eliza-api .
 
       - name: Smoke-test the container
         run: |

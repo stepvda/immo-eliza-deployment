@@ -9,7 +9,9 @@ services:
     runtime: docker
     plan: free
     dockerfilePath: ./api/Dockerfile
-    dockerContext: ./api
+    # Build from the repo root so the API image includes the geo/ + invest/
+    # packages and the data/ artifacts the neighbourhood-aware endpoints need.
+    dockerContext: .
     healthCheckPath: /
     autoDeploy: true
     envVars:

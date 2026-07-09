@@ -23,7 +23,17 @@ pydantic==2.10.4
 # --- frontend (Streamlit) ---
 streamlit==1.41.1
 requests==2.32.3
+pydeck==0.9.3                 # priciness heatmap (deck.gl) + map pins
+altair==5.5.0                # SHAP + ROI charts
+streamlit-searchbox==0.1.24  # address autocomplete typeahead
+
+# --- neighbourhood priciness / geo / explainability / data pipeline ---
+shap==0.52.0                 # feature-contribution barchart (SHAP)
+h3==4.5.0                    # adaptive hex priciness surface (build time)
+shapely==2.1.2               # municipality polygon dissolve (build time)
+pyarrow==24.0.0              # canonical listings parquet store
+openpyxl==3.1.5              # read the Statbel .xlsx investment sources
 
 # --- tests ---
 pytest==8.3.4
-httpx==0.28.1
+httpx==0.28.1                # test client + Geopunt/Photon geocoding client

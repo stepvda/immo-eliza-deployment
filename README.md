@@ -13,11 +13,25 @@ regressor — and puts it behind:
 1. a **FastAPI** REST API (containerised with Docker, deployable to **Render**), and
 2. a **Streamlit** web app with **Buy** and **Rent** tabs (deployable to **Streamlit Community Cloud**).
 
-Both markets — **sale price** and **monthly rent** — are predicted by dedicated models that share the exact same 29-feature preprocessing pipeline.
+Both markets — **sale price** and **monthly rent** — are predicted by dedicated models that share the exact same **30-feature** preprocessing pipeline (now including a **neighbourhood-priciness** feature derived from the exact address).
 
 <p align="center">
   <img src="docs/architecture.svg" alt="Architecture: Streamlit → FastAPI → XGBoost models" width="760">
 </p>
+
+### ✨ New in v2 — neighbourhood-aware pricing
+
+| | |
+|---|---|
+| 📍 **Exact-address pricing** | Address autocomplete (**Geopunt** for Flanders/Brussels, **OSM Photon** nationwide) resolves a street + house number to coordinates; an adaptive **priciness surface** (street/block → postcode → municipality) turns that into a model feature, so pricing pinpoints the address, not just the province. |
+| 🗺️ **Priciness heatmap** | A map heatmap of €/m² (sale & rent) with a **red pin** for your property and **blue pins** for comparables. |
+| 🔎 **Explainable** | A **SHAP** barchart shows how each entered feature pushed the price up/down (in €). |
+| 🏘️ **Comparables** | Five real nearby listings at similar prices, to support the estimate. |
+| ♻️ **Type once, price both** | A single shared input form above the tabs — switch **Buy ↔ Rent** and your inputs stay; the same property flows into **Invest**. |
+| 📈 **Invest tab** | ROI from **rent alone** and **rent + projected capital appreciation** (Statbel history + ING/KBC scenarios), with break-even timing and returns at 5 / 10 / 15 / 20 years. |
+| 🕸️ **Data pipeline** | A polite, resumable multi-site scraping **framework** (`scraper/`) + a documented cron path toward 100k+ sale / 30k+ rent deduplicated listings. |
+
+New API routes: `POST /explain`, `POST /similar`, `GET /priciness` (+ `/priciness/tiles`), `GET /geocode/suggest`, `POST /geocode/resolve`, `POST /invest`. Spatial honesty check via `make eda` (grouped-by-location CV).
 
 ---
 
@@ -25,8 +39,8 @@ Both markets — **sale price** and **monthly rent** — are predicted by dedica
 
 | | |
 |---|---|
-| 🏠🔑 **Two markets, two tabs** | Predict **sale prices** *and* **monthly rents** — pick the tab, describe the property, get a price. |
-| 🧠 **Best model shipped** | Tuned **XGBoost** — the top performer of 4 algorithms benchmarked last week (Sale R² **0.81**, Rent R² **0.63**). |
+| 🏠🔑 **Two markets, shared inputs** | Predict **sale prices** *and* **monthly rents** for the same property — describe it once, switch tabs, both stay filled. |
+| 🧠 **Best model shipped** | Tuned **XGBoost** over a 30-feature pipeline (Sale R² **0.81**, Rent R² **0.62**; honest spatial-CV R² **0.78 / 0.67** on unseen neighbourhoods). |
 | ⚡ **Self-contained pipeline** | Each artifact is a full scikit-learn `Pipeline` — pricing a home is one `pipeline.predict()` call, preprocessing included. |
 | 🔌 **Clean REST API** | `GET /` liveness, `POST /predict`, `POST /predict/batch`, plus `/schema`, `/metrics`, `/health` — with auto-generated Swagger docs. |
 | 🖥️ **Polished web app** | Gradient hero, live confidence bands, model-quality chips, a location map, and a model leaderboard. |
@@ -44,15 +58,29 @@ imme-eliza-deployment/
 ├── api/                          # ── FastAPI backend (the deployable API) ──
 │   ├── app.py                    #    FastAPI app: /, /predict, /predict/batch, /schema, /metrics, /health
 │   ├── predict.py                #    predict() engine — loads models, preprocesses, scores (not a CLI)
-│   ├── features.py               #    single source of truth: the 29-feature contract + options/ranges/geo
+│   ├── features.py               #    single source of truth: the 30-feature contract + options/ranges/geo
+│   ├── explain.py                #    SHAP feature-contribution engine (/explain)
+│   ├── similar.py                #    comparables engine — 5 nearby listings (/similar)
 │   ├── models/                   #    shipped artifacts (tuned XGBoost, sale & rent — ~2–3 MB each)
 │   │   ├── pricing_xgboost_sale.joblib
 │   │   └── pricing_xgboost_rent.joblib
-│   ├── Dockerfile                #    slim, production image for Render
-│   ├── requirements.txt          #    API-only runtime deps
+│   ├── Dockerfile                #    production image (built from the repo root — see render.yaml)
+│   ├── requirements.txt          #    API runtime deps
 │   └── .dockerignore
+├── geo/                          # ── geocoding + neighbourhood priciness ──
+│   ├── geocode.py                #    Geopunt + Photon address autocomplete/resolve
+│   ├── priciness.py              #    adaptive H3/KNN priciness surface (sale & rent)
+│   ├── build_reference.py        #    distil nis_postal.csv → centroids + municipality polygons
+│   └── artifacts/                #    priciness_{sale,rent}.joblib
+├── invest/                       # ── ROI engine ──
+│   └── roi.py                    #    rental yield + capital appreciation → ROI/break-even (/invest)
+├── scraper/                      # ── multi-site collection framework ──
+│   ├── base.py, sites/           #    polite async adapters (immoweb, realo) + registry
+│   ├── normalize.py, dedup.py    #    canonical schema, cross-site de-duplication
+│   ├── store.py, run.py, seed.py #    resumable parquet store + CLI + seed from cleaned data
+│   └── README.md                 #    add-an-adapter guide, legal/ToS note, cron scale-up
 ├── streamlit/                    # ── Streamlit frontend ──
-│   ├── app.py                    #    Buy / Rent tabbed UI; calls the API, falls back to local model
+│   ├── app.py                    #    shared inputs + Buy/Rent/Invest tabs, autocomplete, SHAP, heatmap
 │   └── requirements.txt          #    Streamlit Cloud deps
 ├── ml/                           # ── FULL archive of last week's training project ──
 │   ├── data/{in,training,test,dummy}/   raw + cleaned + split + dummy CSVs
@@ -60,9 +88,12 @@ imme-eliza-deployment/
 │   ├── src/                      #    preprocessing / create / train / tune / evaluate / predict
 │   └── README.md                 #    the ML project's own write-up
 ├── data/
+│   ├── listings/                 #    canonical listings parquet (sale/rent) — priciness + comparables
+│   ├── geo/                      #    municipality centroids + simplified polygons (heatmap)
+│   ├── invest/                   #    Statbel historical + projected prices + NIS↔postal crosswalk
 │   ├── dummy/                    #    10 sale + 10 rent example listings (seed the UI/tests)
 │   └── reference/                #    evaluation_results.csv (metrics table used by the app & docs)
-├── tests/                        #    pytest: test_predict.py (engine) + test_api.py (API)
+├── tests/                        #    pytest: test_predict.py, test_api.py, test_neighbourhood.py
 ├── scripts/smoke_test_api.py     #    fire realistic requests at a running API
 ├── docs/                         #    architecture diagram + API usage notes
 ├── .github/workflows/ci.yml      #    test → build image → smoke-test container

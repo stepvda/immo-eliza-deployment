@@ -1,0 +1,553 @@
+refnis,lat,lon,municipality,province,region
+11001,51.13183,4.38252,Aartselaar,Antwerp,Flanders
+11002,51.26078,4.36949,Antwerpen,Antwerp,Flanders
+11004,51.16568,4.51688,Boechout,Antwerp,Flanders
+11005,51.09356,4.37292,Boom,Antwerp,Flanders
+11008,51.30951,4.50042,Brasschaat,Antwerp,Flanders
+11009,51.33594,4.6282,Brecht,Antwerp,Flanders
+11013,51.15624,4.43284,Edegem,Antwerp,Flanders
+11016,51.4495,4.46589,Essen,Antwerp,Flanders
+11018,51.14373,4.3402,Hemiksem,Antwerp,Flanders
+11021,51.14721,4.4823,Hove,Antwerp,Flanders
+11022,51.39886,4.46869,Kalmthout,Antwerp,Flanders
+11023,51.33395,4.44379,Kapellen,Antwerp,Flanders
+11024,51.12369,4.44455,Kontich,Antwerp,Flanders
+11025,51.1277,4.49781,Lint,Antwerp,Flanders
+11029,51.17465,4.46104,Mortsel,Antwerp,Flanders
+11030,51.1073,4.33544,Niel,Antwerp,Flanders
+11035,51.1928,4.59063,Ranst,Antwerp,Flanders
+11037,51.09382,4.42111,Rumst,Antwerp,Flanders
+11038,51.12266,4.34243,Schelle,Antwerp,Flanders
+11039,51.25617,4.58148,Schilde,Antwerp,Flanders
+11040,51.26417,4.50822,Schoten,Antwerp,Flanders
+11044,51.32859,4.37674,Stabroek,Antwerp,Flanders
+11050,51.22957,4.5169,Wijnegem,Antwerp,Flanders
+11052,51.20677,4.51894,Wommelgem,Antwerp,Flanders
+11053,51.39405,4.60037,Wuustwezel,Antwerp,Flanders
+11054,51.2113,4.67923,Zandhoven,Antwerp,Flanders
+11055,51.25756,4.66982,Zoersel,Antwerp,Flanders
+11057,51.29326,4.7135,Malle,Antwerp,Flanders
+12002,51.10716,4.65614,Berlaar,Antwerp,Flanders
+12005,51.02082,4.57073,Bonheiden,Antwerp,Flanders
+12007,51.09519,4.24254,Bornem,Antwerp,Flanders
+12009,51.09572,4.51414,Duffel,Antwerp,Flanders
+12014,51.07164,4.73604,Heist-op-den-Berg,Antwerp,Flanders
+12021,51.11836,4.57389,Lier,Antwerp,Flanders
+12025,51.02866,4.45023,Mechelen,Antwerp,Flanders
+12026,51.15089,4.66359,Nijlen,Antwerp,Flanders
+12029,51.05068,4.63637,Putte,Antwerp,Flanders
+12035,51.0624,4.53631,Sint-Katelijne-Waver,Antwerp,Flanders
+12040,51.05396,4.36852,Willebroek,Antwerp,Flanders
+12041,51.06115,4.28176,Puurs-Sint-Amands,Antwerp,Flanders
+13001,51.33462,5.08545,Arendonk,Antwerp,Flanders
+13002,51.40478,4.89134,Baarle-Hertog,Antwerp,Flanders
+13003,51.15861,5.18297,Balen,Antwerp,Flanders
+13004,51.3144,4.82333,Beerse,Antwerp,Flanders
+13006,51.2415,5.12212,Dessel,Antwerp,Flanders
+13008,51.16649,4.98477,Geel,Antwerp,Flanders
+13010,51.17978,4.73912,Grobbendonk,Antwerp,Flanders
+13011,51.16382,4.82762,Herentals,Antwerp,Flanders
+13012,51.13916,4.75993,Herenthout,Antwerp,Flanders
+13013,51.04738,4.88303,Herselt,Antwerp,Flanders
+13014,51.44045,4.76371,Hoogstraten,Antwerp,Flanders
+13016,51.06283,4.81245,Hulshout,Antwerp,Flanders
+13017,51.24325,4.94204,Kasterlee,Antwerp,Flanders
+13019,51.25574,4.8342,Lille,Antwerp,Flanders
+13021,51.12454,5.07357,Meerhout,Antwerp,Flanders
+13023,51.37042,4.8702,Merksplas,Antwerp,Flanders
+13025,51.23818,5.1963,Mol,Antwerp,Flanders
+13029,51.16346,4.8856,Olen,Antwerp,Flanders
+13031,51.32074,5.00437,Oud-Turnhout,Antwerp,Flanders
+13035,51.41492,5.02596,Ravels,Antwerp,Flanders
+13036,51.26707,5.07678,Retie,Antwerp,Flanders
+13037,51.35516,4.7675,Rijkevorsel,Antwerp,Flanders
+13040,51.32898,4.94017,Turnhout,Antwerp,Flanders
+13044,51.21766,4.7729,Vorselaar,Antwerp,Flanders
+13046,51.3053,4.88512,Vosselaar,Antwerp,Flanders
+13049,51.10647,4.88195,Westerlo,Antwerp,Flanders
+13053,51.08095,5.00597,Laakdal,Antwerp,Flanders
+21001,50.82898,4.29291,Anderlecht,Brussels-Capital,Brussels
+21002,50.81018,4.43803,Oudergem,Brussels-Capital,Brussels
+21003,50.86466,4.29393,Sint-Agatha-Berchem,Brussels-Capital,Brussels
+21004,50.855,4.35122,Brussel,Brussels-Capital,Brussels
+21005,50.83298,4.39461,Etterbeek,Brussels-Capital,Brussels
+21006,50.87002,4.40823,Evere,Brussels-Capital,Brussels
+21007,50.81406,4.32418,Vorst,Brussels-Capital,Brussels
+21008,50.87438,4.30948,Ganshoren,Brussels-Capital,Brussels
+21009,50.82232,4.37709,Elsene,Brussels-Capital,Brussels
+21010,50.88172,4.32138,Jette,Brussels-Capital,Brussels
+21011,50.86299,4.32409,Koekelberg,Brussels-Capital,Brussels
+21012,50.85523,4.31846,Sint-Jans-Molenbeek,Brussels-Capital,Brussels
+21013,50.82948,4.34465,Sint-Gillis,Brussels-Capital,Brussels
+21014,50.85381,4.36936,Sint-Joost-ten-Node,Brussels-Capital,Brussels
+21015,50.8618,4.38606,Schaarbeek,Brussels-Capital,Brussels
+21016,50.78987,4.36138,Ukkel,Brussels-Capital,Brussels
+21017,50.79293,4.42349,Watermaal-Bosvoorde,Brussels-Capital,Brussels
+21018,50.8479,4.43155,Sint-Lambrechts-Woluwe,Brussels-Capital,Brussels
+21019,50.8311,4.44309,Sint-Pieters-Woluwe,Brussels-Capital,Brussels
+23002,50.90728,4.21534,Asse,Flemish Brabant,Flanders
+23003,50.7504,4.30185,Beersel,Flemish Brabant,Flanders
+23009,50.71067,3.93217,Bever,Flemish Brabant,Flanders
+23016,50.8533,4.23383,Dilbeek,Flemish Brabant,Flanders
+23025,50.94468,4.37656,Grimbergen,Flemish Brabant,Flanders
+23027,50.72639,4.23698,Halle,Flemish Brabant,Flanders
+23033,50.76102,4.45082,Hoeilaart,Flemish Brabant,Flanders
+23038,50.94129,4.56066,Kampenhout,Flemish Brabant,Flanders
+23039,51.00365,4.35465,Kapelle-op-den-Bos,Flemish Brabant,Flanders
+23044,50.86652,4.09307,Liedekerke,Flemish Brabant,Flanders
+23045,51.01058,4.2764,Londerzeel,Flemish Brabant,Flanders
+23047,50.90262,4.44414,Machelen,Flemish Brabant,Flanders
+23050,50.96114,4.31565,Meise,Flemish Brabant,Flanders
+23052,50.95121,4.24715,Merchtem,Flemish Brabant,Flanders
+23060,50.96248,4.18078,Opwijk,Flemish Brabant,Flanders
+23062,50.7713,4.5329,Overijse,Flemish Brabant,Flanders
+23064,50.74423,4.14763,Pepingen,Flemish Brabant,Flanders
+23077,50.78747,4.24487,Sint-Pieters-Leeuw,Flemish Brabant,Flanders
+23081,50.92102,4.49924,Steenokkerzeel,Flemish Brabant,Flanders
+23086,50.86784,4.16023,Ternat,Flemish Brabant,Flanders
+23088,50.93026,4.43391,Vilvoorde,Flemish Brabant,Flanders
+23094,50.87126,4.48652,Zaventem,Flemish Brabant,Flanders
+23096,50.97891,4.45809,Zemst,Flemish Brabant,Flanders
+23097,50.83751,4.09739,Roosdaal,Flemish Brabant,Flanders
+23098,50.7935,4.30903,Drogenbos,Flemish Brabant,Flanders
+23099,50.84541,4.47133,Kraainem,Flemish Brabant,Flanders
+23100,50.76795,4.34542,Linkebeek,Flemish Brabant,Flanders
+23101,50.74452,4.37376,Sint-Genesius-Rode,Flemish Brabant,Flanders
+23102,50.90958,4.30932,Wemmel,Flemish Brabant,Flanders
+23103,50.84309,4.49242,Wezembeek-Oppem,Flemish Brabant,Flanders
+23104,50.81326,4.16369,Lennik,Flemish Brabant,Flanders
+23105,50.90418,4.11571,Affligem,Flemish Brabant,Flanders
+24001,50.98898,4.86461,Aarschot,Flemish Brabant,Flanders
+24007,51.00702,4.78463,Begijnendijk,Flemish Brabant,Flanders
+24008,50.93435,4.97787,Bekkevoort,Flemish Brabant,Flanders
+24009,50.85383,4.60971,Bertem,Flemish Brabant,Flanders
+24011,50.83012,4.76739,Bierbeek,Flemish Brabant,Flanders
+24014,50.98009,4.56084,Boortmeerbeek,Flemish Brabant,Flanders
+24016,50.83483,4.84249,Boutersem,Flemish Brabant,Flanders
+24020,51.00142,5.06911,Diest,Flemish Brabant,Flanders
+24028,50.89148,5.13114,Geetbets,Flemish Brabant,Flanders
+24033,50.96403,4.64118,Haacht,Flemish Brabant,Flanders
+24038,50.91061,4.64656,Herent,Flemish Brabant,Flanders
+24041,50.77913,4.87653,Hoegaarden,Flemish Brabant,Flanders
+24043,50.92969,4.80184,Holsbeek,Flemish Brabant,Flanders
+24045,50.78978,4.6119,Huldenberg,Flemish Brabant,Flanders
+24048,51.0052,4.6543,Keerbergen,Flemish Brabant,Flanders
+24054,50.89313,5.02311,Kortenaken,Flemish Brabant,Flanders
+24055,50.88993,4.56881,Kortenberg,Flemish Brabant,Flanders
+24059,50.75469,5.06164,Landen,Flemish Brabant,Flanders
+24062,50.88219,4.70591,Leuven,Flemish Brabant,Flanders
+24066,50.882,4.82892,Lubbeek,Flemish Brabant,Flanders
+24086,50.82002,4.68691,Oud-Heverlee,Flemish Brabant,Flanders
+24094,50.95956,4.73226,Rotselaar,Flemish Brabant,Flanders
+24104,50.82162,4.52434,Tervuren,Flemish Brabant,Flanders
+24107,50.81196,4.94188,Tienen,Flemish Brabant,Flanders
+24109,50.9992,4.72678,Tremelo,Flemish Brabant,Flanders
+24130,50.83509,5.10117,Zoutleeuw,Flemish Brabant,Flanders
+24133,50.82078,5.042,Linter,Flemish Brabant,Flanders
+24134,50.99807,4.96857,Scherpenheuvel-Zichem,Flemish Brabant,Flanders
+24135,50.92338,4.89655,Tielt-Winge,Flemish Brabant,Flanders
+24137,50.86702,4.94944,Glabbeek,Flemish Brabant,Flanders
+25005,50.77615,4.76466,Bevekom,Walloon Brabant,Wallonia
+25014,50.67333,4.35469,Eigenbrakel,Walloon Brabant,Wallonia
+25015,50.67967,4.28408,Kasteelbrakel,Walloon Brabant,Wallonia
+25018,50.68714,4.69061,Chaumont-Gistoux,Walloon Brabant,Wallonia
+25023,50.62645,4.5626,Court-Saint-Etienne,Walloon Brabant,Wallonia
+25031,50.61017,4.45612,Genepiën,Walloon Brabant,Wallonia
+25037,50.74845,4.68804,Graven,Walloon Brabant,Wallonia
+25043,50.69911,4.78148,Incourt,Walloon Brabant,Wallonia
+25044,50.64247,4.25752,Itter,Walloon Brabant,Wallonia
+25048,50.72839,4.86034,Geldenaken,Walloon Brabant,Wallonia
+25050,50.7363,4.46483,Terhulpen,Walloon Brabant,Wallonia
+25068,50.63734,4.62327,Mont-Saint-Guibert,Walloon Brabant,Wallonia
+25072,50.59698,4.3322,Nijvel,Walloon Brabant,Wallonia
+25084,50.63417,4.78988,Perwijs,Walloon Brabant,Wallonia
+25091,50.72083,4.52563,Rixensart,Walloon Brabant,Wallonia
+25105,50.69018,4.19056,Tubeke,Walloon Brabant,Wallonia
+25107,50.5624,4.52669,Villers-la-Ville,Walloon Brabant,Wallonia
+25110,50.70976,4.40352,Waterloo,Walloon Brabant,Wallonia
+25112,50.7158,4.59324,Waver,Walloon Brabant,Wallonia
+25117,50.58943,4.62326,Chastre,Walloon Brabant,Wallonia
+25118,50.74835,4.98274,Hélécine,Walloon Brabant,Wallonia
+25119,50.68233,4.46159,Lasne,Walloon Brabant,Wallonia
+25120,50.68991,4.96329,Orp-Jauche,Walloon Brabant,Wallonia
+25121,50.67036,4.56416,Ottignies-Louvain-la-Neuve,Walloon Brabant,Wallonia
+25122,50.6567,4.88608,Ramillies,Walloon Brabant,Wallonia
+25123,50.6715,4.13038,Rebecq,Walloon Brabant,Wallonia
+25124,50.63121,4.69728,Walhain,Walloon Brabant,Wallonia
+31003,51.15069,3.33667,Beernem,West Flanders,Flanders
+31004,51.30166,3.13979,Blankenberge,West Flanders,Flanders
+31005,51.24888,3.21441,Brugge,West Flanders,Flanders
+31006,51.25218,3.32739,Damme,West Flanders,Flanders
+31012,51.18863,3.09636,Jabbeke,West Flanders,Flanders
+31022,51.11935,3.23034,Oostkamp,West Flanders,Flanders
+31033,51.06232,3.09548,Torhout,West Flanders,Flanders
+31040,51.12663,3.13432,Zedelgem,West Flanders,Flanders
+31042,51.25395,3.13138,Zuienkerke,West Flanders,Flanders
+31043,51.33253,3.30792,Knokke-Heist,West Flanders,Flanders
+32003,51.04738,2.85422,Diksmuide,West Flanders,Flanders
+32006,50.97,2.89647,Houthulst,West Flanders,Flanders
+32010,51.08902,2.96383,Koekelare,West Flanders,Flanders
+32011,51.02478,3.00178,Kortemark,West Flanders,Flanders
+32030,50.96064,2.77536,Lo-Reninge,West Flanders,Flanders
+33011,50.85434,2.86647,Ieper,West Flanders,Flanders
+33016,50.75978,2.89755,Mesen,West Flanders,Flanders
+33021,50.86102,2.69153,Poperinge,West Flanders,Flanders
+33029,50.81018,3.05654,Wervik,West Flanders,Flanders
+33037,50.86651,3.00364,Zonnebeke,West Flanders,Flanders
+33039,50.7755,2.83031,Heuvelland,West Flanders,Flanders
+33040,50.91593,2.92938,Langemark-Poelkapelle,West Flanders,Flanders
+33041,50.9137,2.74157,Vleteren,West Flanders,Flanders
+34002,50.83072,3.4539,Anzegem,West Flanders,Flanders
+34003,50.77765,3.45371,Avelgem,West Flanders,Flanders
+34009,50.84256,3.36616,Deerlijk,West Flanders,Flanders
+34013,50.86382,3.30735,Harelbeke,West Flanders,Flanders
+34022,50.80003,3.26455,Kortrijk,West Flanders,Flanders
+34023,50.86017,3.27158,Kuurne,West Flanders,Flanders
+34025,50.88599,3.23202,Lendelede,West Flanders,Flanders
+34027,50.7925,3.15439,Menen,West Flanders,Flanders
+34040,50.88062,3.4025,Waregem,West Flanders,Flanders
+34041,50.83132,3.17401,Wevelgem,West Flanders,Flanders
+34042,50.78695,3.37256,Zwevegem,West Flanders,Flanders
+34043,50.73055,3.36277,Spiere-Helkijn,West Flanders,Flanders
+35002,51.23818,2.97618,Bredene,West Flanders,Flanders
+35005,51.15114,2.9432,Gistel,West Flanders,Flanders
+35006,51.11267,3.03082,Ichtegem,West Flanders,Flanders
+35011,51.15343,2.83857,Middelkerke,West Flanders,Flanders
+35013,51.2107,2.92358,Oostende,West Flanders,Flanders
+35014,51.18606,3.01227,Oudenburg,West Flanders,Flanders
+35029,51.26162,3.0474,De Haan,West Flanders,Flanders
+36006,50.98942,3.08228,Hooglede,West Flanders,Flanders
+36007,50.92146,3.26068,Ingelmunster,West Flanders,Flanders
+36008,50.92109,3.20549,Izegem,West Flanders,Flanders
+36010,50.87183,3.14924,Ledegem,West Flanders,Flanders
+36011,51.02776,3.14613,Lichtervelde,West Flanders,Flanders
+36012,50.88082,3.07896,Moorslede,West Flanders,Flanders
+36015,50.93683,3.13357,Roeselare,West Flanders,Flanders
+36019,50.95374,3.01893,Staden,West Flanders,Flanders
+37002,50.95323,3.40656,Dentergem,West Flanders,Flanders
+37010,50.9306,3.33722,Oostrozebeke,West Flanders,Flanders
+37011,51.001,3.26556,Pittem,West Flanders,Flanders
+37017,50.91204,3.36731,Wielsbeke,West Flanders,Flanders
+37020,50.98162,3.2031,Ardooie,West Flanders,Flanders
+38002,50.97576,2.67777,Alveringem,West Flanders,Flanders
+38008,51.08071,2.5883,De Panne,West Flanders,Flanders
+38014,51.11195,2.67933,Koksijde,West Flanders,Flanders
+38016,51.12505,2.76481,Nieuwpoort,West Flanders,Flanders
+38025,51.0466,2.66472,Veurne,West Flanders,Flanders
+41002,50.94471,4.06872,Aalst,East Flanders,Flanders
+41011,50.88632,4.05812,Denderleeuw,East Flanders,Flanders
+41018,50.77964,3.90406,Geraardsbergen,East Flanders,Flanders
+41024,50.88468,3.99336,Haaltert,East Flanders,Flanders
+41027,50.87043,3.89246,Herzele,East Flanders,Flanders
+41034,50.96613,3.94564,Lede,East Flanders,Flanders
+41048,50.82604,4.00481,Ninove,East Flanders,Flanders
+41063,50.93101,3.87585,Sint-Lievens-Houtem,East Flanders,Flanders
+41081,50.86766,3.80553,Zottegem,East Flanders,Flanders
+41082,50.92151,3.95197,Erpe-Mere,East Flanders,Flanders
+42003,51.03627,3.97926,Berlare,East Flanders,Flanders
+42004,51.01184,4.19901,Buggenhout,East Flanders,Flanders
+42006,51.02756,4.09054,Dendermonde,East Flanders,Flanders
+42008,51.07808,4.13985,Hamme,East Flanders,Flanders
+42010,51.04242,3.88421,Laarne,East Flanders,Flanders
+42011,50.9925,4.11897,Lebbeke,East Flanders,Flanders
+42023,51.11864,4.07486,Waasmunster,East Flanders,Flanders
+42025,50.99449,3.87023,Wetteren,East Flanders,Flanders
+42026,50.99875,3.95347,Wichelen,East Flanders,Flanders
+42028,51.06735,4.0359,Zele,East Flanders,Flanders
+43002,51.22713,3.71485,Assenede,East Flanders,Flanders
+43005,51.19432,3.56233,Eeklo,East Flanders,Flanders
+43007,51.20805,3.62724,Kaprijke,East Flanders,Flanders
+43010,51.19815,3.45033,Maldegem,East Flanders,Flanders
+43014,51.25996,3.5802,Sint-Laureins,East Flanders,Flanders
+43018,51.19915,3.80861,Zelzate,East Flanders,Flanders
+44013,51.04421,3.80936,Destelbergen,East Flanders,Flanders
+44019,51.14333,3.70818,Evergem,East Flanders,Flanders
+44020,50.92894,3.6855,Gavere,East Flanders,Flanders
+44021,51.07446,3.72553,Gent,East Flanders,Flanders
+44052,50.93884,3.79714,Oosterzele,East Flanders,Flanders
+44064,51.00957,3.62221,Sint-Martens-Latem,East Flanders,Flanders
+44081,50.93735,3.47263,Zulte,East Flanders,Flanders
+44083,51.01776,3.53161,Deinze,East Flanders,Flanders
+44084,51.09526,3.44724,Aalter,East Flanders,Flanders
+44085,51.12705,3.58754,Lievegem,East Flanders,Flanders
+45035,50.85352,3.62099,Oudenaarde,East Flanders,Flanders
+45041,50.7497,3.60759,Ronse,East Flanders,Flanders
+45059,50.79795,3.758,Brakel,East Flanders,Flanders
+45060,50.77969,3.5301,Kluisbergen,East Flanders,Flanders
+45061,50.84835,3.52759,Wortegem-Petegem,East Flanders,Flanders
+45062,50.83214,3.69449,Horebeke,East Flanders,Flanders
+45063,50.80548,3.83645,Lierde,East Flanders,Flanders
+45064,50.79518,3.64111,Maarkedal,East Flanders,Flanders
+45065,50.87724,3.72398,Zwalm,East Flanders,Flanders
+45068,50.90806,3.56094,Kruisem,East Flanders,Flanders
+46020,51.22956,4.11889,Sint-Gillis-Waas,East Flanders,Flanders
+46021,51.16472,4.10853,Sint-Niklaas,East Flanders,Flanders
+46024,51.21232,4.02874,Stekene,East Flanders,Flanders
+46025,51.13309,4.20578,Temse,East Flanders,Flanders
+51004,50.63937,3.7729,Aat,Hainaut,Wallonia
+51008,50.53251,3.68863,Beloeil,Hainaut,Wallonia
+51009,50.47953,3.68654,Bernissart,Hainaut,Wallonia
+51012,50.60203,3.86718,Brugelette,Hainaut,Wallonia
+51014,50.57118,3.78394,Chièvres,Hainaut,Wallonia
+51017,50.72062,3.69907,Elzele,Hainaut,Wallonia
+51019,50.75358,3.73166,Vloesberg,Hainaut,Wallonia
+51065,50.68239,3.60071,Frasnes-lez-Anvaing,Hainaut,Wallonia
+51067,50.67203,3.9933,Edingen,Hainaut,Wallonia
+51068,50.64867,3.95901,Opzullik,Hainaut,Wallonia
+51069,50.71253,3.83307,Lessen,Hainaut,Wallonia
+52010,50.46249,4.28756,Chapelle-lez-Herlaimont,Hainaut,Wallonia
+52011,50.42105,4.4346,Charleroi,Hainaut,Wallonia
+52012,50.39718,4.52242,Châtelet,Hainaut,Wallonia
+52015,50.47245,4.34106,Courcelles,Hainaut,Wallonia
+52018,50.43444,4.54696,Farciennes,Hainaut,Wallonia
+52021,50.48637,4.53921,Fleurus,Hainaut,Wallonia
+52022,50.40734,4.32181,Fontaine-l’Evêque,Hainaut,Wallonia
+52025,50.34748,4.52776,Gerpinnes,Hainaut,Wallonia
+52048,50.37623,4.37133,Montigny-le-Tilleul,Hainaut,Wallonia
+52055,50.51389,4.38133,Pont-à-Celles,Hainaut,Wallonia
+52074,50.40494,4.57691,Aiseau-Presles,Hainaut,Wallonia
+52075,50.52788,4.44818,Les Bons Villers,Hainaut,Wallonia
+53014,50.4271,3.79964,Boussu,Hainaut,Wallonia
+53020,50.38735,3.78701,Dour,Hainaut,Wallonia
+53028,50.38997,3.88621,Frameries,Hainaut,Wallonia
+53039,50.4358,3.71369,Hensies,Hainaut,Wallonia
+53044,50.52523,3.90121,Jurbeke,Hainaut,Wallonia
+53046,50.57045,3.91149,Lens,Hainaut,Wallonia
+53053,50.45242,3.97194,Bergen,Hainaut,Wallonia
+53065,50.43782,3.85865,Quaregnon,Hainaut,Wallonia
+53068,50.39583,3.70246,Quiévrain,Hainaut,Wallonia
+53070,50.48727,3.80094,Saint-Ghislain,Hainaut,Wallonia
+53082,50.40587,3.84418,Colfontaine,Hainaut,Wallonia
+53083,50.35149,3.7247,Honnelles,Hainaut,Wallonia
+53084,50.36659,3.95437,Quévy,Hainaut,Wallonia
+55004,50.61617,4.14245,’s Gravenbrakel,Hainaut,Wallonia
+55035,50.5073,4.10616,Le Roeulx,Hainaut,Wallonia
+55040,50.56614,4.03834,Zinnik,Hainaut,Wallonia
+55050,50.56271,4.17944,Ecaussinnes,Hainaut,Wallonia
+55085,50.54782,4.26264,Seneffe,Hainaut,Wallonia
+55086,50.49324,4.23909,Manage,Hainaut,Wallonia
+56001,50.40361,4.26567,Anderlues,Hainaut,Wallonia
+56005,50.22931,4.25923,Beaumont,Hainaut,Wallonia
+56016,50.0409,4.32427,Chimay,Hainaut,Wallonia
+56022,50.30393,4.13859,Erquelinnes,Hainaut,Wallonia
+56029,50.16522,4.34749,Froidchapelle,Hainaut,Wallonia
+56044,50.35579,4.24179,Lobbes,Hainaut,Wallonia
+56049,50.32095,4.19453,Merbes-le-Château,Hainaut,Wallonia
+56051,50.00255,4.21749,Momignies,Hainaut,Wallonia
+56078,50.32424,4.31079,Thuin,Hainaut,Wallonia
+56086,50.32741,4.41386,Ham-sur-Heure-Nalinnes,Hainaut,Wallonia
+56088,50.16002,4.21057,Sivry-Rance,Hainaut,Wallonia
+57003,50.55616,3.46575,Antoing,Hainaut,Wallonia
+57018,50.7037,3.44906,Celles,Hainaut,Wallonia
+57027,50.68767,3.28848,Estaimpuis,Hainaut,Wallonia
+57062,50.68516,3.35678,Pecq,Hainaut,Wallonia
+57064,50.52946,3.56387,Péruwelz,Hainaut,Wallonia
+57072,50.54449,3.31981,Rumes,Hainaut,Wallonia
+57081,50.61621,3.40798,Doornik,Hainaut,Wallonia
+57093,50.52715,3.39511,Brunehaut,Hainaut,Wallonia
+57094,50.59727,3.62878,Leuze-en-Hainaut,Hainaut,Wallonia
+57095,50.73813,3.50456,Mont-de-l’Enclus,Hainaut,Wallonia
+57096,50.73641,3.25107,Moeskroen,Hainaut,Wallonia
+57097,50.75159,2.93037,Komen-Waasten,Hainaut,Wallonia
+58001,50.47349,4.15667,La Louvière,Hainaut,Wallonia
+58002,50.40869,4.17719,Binche,Hainaut,Wallonia
+58003,50.37875,4.10062,Estinnes,Hainaut,Wallonia
+58004,50.44751,4.24361,Morlanwelz,Hainaut,Wallonia
+61003,50.55298,5.31157,Amay,Liege,Wallonia
+61010,50.5826,5.0995,Burdinne,Liege,Wallonia
+61012,50.41293,5.33586,Clavier,Liege,Wallonia
+61019,50.4072,5.6208,Ferrières,Liege,Wallonia
+61024,50.43735,5.55503,Hamoir,Liege,Wallonia
+61028,50.54045,5.10536,Héron,Liege,Wallonia
+61031,50.5088,5.22242,Hoei,Liege,Wallonia
+61039,50.4674,5.23951,Marchin,Liege,Wallonia
+61041,50.47344,5.30186,Modave,Liege,Wallonia
+61043,50.51715,5.40072,Nandrin,Liege,Wallonia
+61048,50.44474,5.46586,Ouffet,Liege,Wallonia
+61063,50.6088,5.30225,Verlaine,Liege,Wallonia
+61068,50.59335,5.24281,Villers-Le-Bouillet,Liege,Wallonia
+61072,50.55029,5.19794,Wanze,Liege,Wallonia
+61079,50.48941,5.49859,Anthisnes,Liege,Wallonia
+61080,50.55759,5.38881,Engis,Liege,Wallonia
+61081,50.47511,5.38017,Tinlot,Liege,Wallonia
+62003,50.68277,5.50611,Ans,Liege,Wallonia
+62006,50.69283,5.45517,Awans,Liege,Wallonia
+62009,50.45752,5.70152,Aywaille,Liege,Wallonia
+62011,50.76557,5.61004,Bitsingen,Liege,Wallonia
+62015,50.6284,5.66156,Beyne-Heusay,Liege,Wallonia
+62022,50.58145,5.63374,Chaudfontaine,Liege,Wallonia
+62026,50.48175,5.57998,Comblain-au-Pont,Liege,Wallonia
+62027,50.72073,5.75904,Dalhem,Liege,Wallonia
+62032,50.5376,5.56885,Esneux,Liege,Wallonia
+62038,50.61518,5.68401,Fléron,Liege,Wallonia
+62051,50.68147,5.60651,Herstal,Liege,Wallonia
+62060,50.71535,5.54627,Juprelle,Liege,Wallonia
+62063,50.63178,5.59047,Luik,Liege,Wallonia
+62079,50.72118,5.64142,Oupeye,Liege,Wallonia
+62093,50.63215,5.52643,Saint-Nicolas,Liege,Wallonia
+62096,50.58913,5.51583,Seraing,Liege,Wallonia
+62099,50.63256,5.73126,Soumagne,Liege,Wallonia
+62100,50.5192,5.66642,Sprimont,Liege,Wallonia
+62108,50.73836,5.68746,Wezet,Liege,Wallonia
+62118,50.63775,5.43947,Grâce-Hollogne,Liege,Wallonia
+62119,50.67448,5.70891,Blegny,Liege,Wallonia
+62120,50.59704,5.44131,Flémalle,Liege,Wallonia
+62121,50.54406,5.48806,Neupré,Liege,Wallonia
+62122,50.57106,5.68021,Trooz,Liege,Wallonia
+63001,50.34557,6.18143,Amel,Liege,Wallonia
+63003,50.70047,5.85131,Aubel,Liege,Wallonia
+63004,50.58314,6.04476,Baelen,Liege,Wallonia
+63012,50.39601,6.31387,Büllingen,Liege,Wallonia
+63013,50.46453,6.2093,Bütgenbach,Liege,Wallonia
+63020,50.61398,5.8745,Dison,Liege,Wallonia
+63023,50.61,6.12551,Eupen,Liege,Wallonia
+63035,50.6487,5.79626,Herve,Liege,Wallonia
+63038,50.53082,5.96648,Jalhay,Liege,Wallonia
+63040,50.7175,6.02343,Kelmis,Liege,Wallonia
+63045,50.30782,5.78553,Lierneux,Liege,Wallonia
+63046,50.61133,5.93717,Limburg,Liege,Wallonia
+63048,50.67773,6.01252,Lontzen,Liege,Wallonia
+63049,50.43146,6.04161,Malmedy,Liege,Wallonia
+63057,50.58736,5.73196,Olne,Liege,Wallonia
+63058,50.57219,5.79705,Pepinster,Liege,Wallonia
+63061,50.66478,6.12477,Raeren,Liege,Wallonia
+63067,50.28687,6.12578,Sankt Vith,Liege,Wallonia
+63072,50.472,5.86705,Spa,Liege,Wallonia
+63073,50.41648,5.95801,Stavelot,Liege,Wallonia
+63075,50.40822,5.79844,Stoumont,Liege,Wallonia
+63076,50.50996,5.8176,Theux,Liege,Wallonia
+63079,50.58498,5.86679,Verviers,Liege,Wallonia
+63080,50.46244,6.12468,Weismes,Liege,Wallonia
+63084,50.6635,5.93913,Welkenraedt,Liege,Wallonia
+63086,50.35657,5.8843,Trois-Ponts,Liege,Wallonia
+63087,50.20353,6.09301,Burg-Reuland,Liege,Wallonia
+63088,50.7256,5.94904,Plombières,Liege,Wallonia
+63089,50.66293,5.86981,Thimister-Clermont,Liege,Wallonia
+64008,50.70377,5.20308,Berloz,Liege,Wallonia
+64015,50.61532,5.14948,Braives,Liege,Wallonia
+64021,50.71062,5.39683,Crisnée,Liege,Wallonia
+64023,50.64937,5.32601,Donceel,Liege,Wallonia
+64025,50.66367,5.40208,Fexhe-le-Haut-Clocher,Liege,Wallonia
+64029,50.66962,5.18142,Geer,Liege,Wallonia
+64034,50.66602,5.0731,Hannuit,Liege,Wallonia
+64047,50.72144,5.02758,Lijsem,Liege,Wallonia
+64056,50.72326,5.3473,Oerle,Liege,Wallonia
+64063,50.68568,5.34121,Remicourt,Liege,Wallonia
+64065,50.59669,5.36058,Saint-Georges-sur-Meuse,Liege,Wallonia
+64074,50.69386,5.26692,Borgworm,Liege,Wallonia
+64075,50.61787,5.02436,Wasseiges,Liege,Wallonia
+64076,50.64482,5.24274,Faimes,Liege,Wallonia
+71002,51.00864,5.58475,As,Limburg,Flanders
+71004,51.06547,5.23607,Beringen,Limburg,Flanders
+71011,50.91148,5.41743,Diepenbeek,Limburg,Flanders
+71016,50.96717,5.49492,Genk,Limburg,Flanders
+71017,50.73742,5.1695,Gingelom,Limburg,Flanders
+71020,50.94999,5.09428,Halen,Limburg,Flanders
+71024,50.93736,5.17777,Herk-de-Stad,Limburg,Flanders
+71034,51.11741,5.25047,Leopoldsburg,Limburg,Flanders
+71037,50.9953,5.18329,Lummen,Limburg,Flanders
+71045,50.87953,5.20504,Nieuwerkerken,Limburg,Flanders
+71053,50.81034,5.20298,Sint-Truiden,Limburg,Flanders
+71066,50.99193,5.37664,Zonhoven,Limburg,Flanders
+71067,50.93287,5.57541,Zutendaal,Limburg,Flanders
+71070,51.01991,5.28915,Heusden-Zolder,Limburg,Flanders
+72003,51.18701,5.56388,Bocholt,Limburg,Flanders
+72004,51.14189,5.63249,Bree,Limburg,Flanders
+72018,51.153,5.76015,Kinrooi,Limburg,Flanders
+72020,51.22559,5.30204,Lommel,Limburg,Flanders
+72021,51.08784,5.7152,Maaseik,Limburg,Flanders
+72030,51.12843,5.46159,Peer,Limburg,Flanders
+72037,51.26015,5.50731,Hamont-Achel,Limburg,Flanders
+72038,51.13845,5.34648,Hechtel-Eksel,Limburg,Flanders
+72039,51.04534,5.40843,Houthalen-Helchteren,Limburg,Flanders
+72041,51.03598,5.7121,Dilsen-Stokkem,Limburg,Flanders
+72042,51.07493,5.55632,Oudsbergen,Limburg,Flanders
+72043,51.21493,5.42721,Pelt,Limburg,Flanders
+73001,50.8784,5.29057,Alken,Limburg,Flanders
+73022,50.75368,5.31192,Heers,Limburg,Flanders
+73028,50.72601,5.42536,Herstappe,Limburg,Flanders
+73042,50.89945,5.64436,Lanaken,Limburg,Flanders
+73066,50.80537,5.59231,Riemst,Limburg,Flanders
+73098,50.84265,5.32343,Wellen,Limburg,Flanders
+73107,50.96892,5.67792,Maasmechelen,Limburg,Flanders
+73109,50.74533,5.82267,Voeren,Limburg,Flanders
+81001,49.67519,5.79389,Aarlen,Luxembourg,Wallonia
+81003,49.74553,5.7575,Attert,Luxembourg,Wallonia
+81004,49.5749,5.77697,Aubange,Luxembourg,Wallonia
+81013,49.81114,5.72483,Martelange,Luxembourg,Wallonia
+81015,49.61476,5.81127,Messancy,Luxembourg,Wallonia
+82009,49.877,5.69659,Fauvillers,Luxembourg,Wallonia
+82014,50.14439,5.77094,Houffalize,Luxembourg,Wallonia
+82032,50.27811,5.89337,Vielsalm,Luxembourg,Wallonia
+82036,49.93429,5.60659,Vaux-sur-Sûre,Luxembourg,Wallonia
+82037,50.19258,5.91146,Gouvy,Luxembourg,Wallonia
+82038,50.02495,5.528,Sainte-Ode,Luxembourg,Wallonia
+83012,50.36073,5.48828,Durbuy,Luxembourg,Wallonia
+83013,50.29659,5.55782,Erezée,Luxembourg,Wallonia
+83028,50.26737,5.43279,Hotton,Luxembourg,Wallonia
+83031,50.16709,5.60498,La Roche-en-Ardenne,Luxembourg,Wallonia
+83034,50.20929,5.34364,Marche-en-Famenne,Luxembourg,Wallonia
+83040,50.13663,5.3588,Nassogne,Luxembourg,Wallonia
+83044,50.21934,5.51606,Rendeux,Luxembourg,Wallonia
+83049,50.09971,5.49013,Tenneville,Luxembourg,Wallonia
+83055,50.28902,5.6627,Manhay,Luxembourg,Wallonia
+84009,49.85397,5.24627,Bertrix,Luxembourg,Wallonia
+84010,49.80599,5.0832,Bouillon,Luxembourg,Wallonia
+84016,50.00417,5.06649,Daverdisse,Luxembourg,Wallonia
+84029,49.79534,5.30941,Herbeumont,Luxembourg,Wallonia
+84033,49.80989,5.56674,Léglise,Luxembourg,Wallonia
+84035,49.97813,5.23815,Libin,Luxembourg,Wallonia
+84043,49.85103,5.43339,Neufchâteau,Luxembourg,Wallonia
+84050,49.90773,5.13693,Paliseul,Luxembourg,Wallonia
+84059,50.03791,5.3456,Saint-Hubert,Luxembourg,Wallonia
+84068,50.07545,5.22566,Tellin,Luxembourg,Wallonia
+84075,50.06013,5.09849,Wellin,Luxembourg,Wallonia
+84077,49.94617,5.4224,Libramont-Chevigny,Luxembourg,Wallonia
+85007,49.72013,5.39146,Chiny,Luxembourg,Wallonia
+85009,49.66392,5.60897,Etalle,Luxembourg,Wallonia
+85011,49.70772,5.27549,Florenville,Luxembourg,Wallonia
+85024,49.60366,5.46996,Meix-devant-Virton,Luxembourg,Wallonia
+85026,49.56943,5.68095,Musson,Luxembourg,Wallonia
+85034,49.61823,5.67648,Saint-Léger,Luxembourg,Wallonia
+85039,49.68591,5.48443,Tintigny,Luxembourg,Wallonia
+85045,49.5712,5.57226,Virton,Luxembourg,Wallonia
+85046,49.73501,5.61713,Habay,Luxembourg,Wallonia
+85047,49.53543,5.48384,Rouvroy,Luxembourg,Wallonia
+91005,50.31877,4.80999,Anhée,Namur,Wallonia
+91013,50.09313,4.95261,Beauraing,Namur,Wallonia
+91015,49.92199,5.01965,Bièvre,Namur,Wallonia
+91030,50.26947,5.12261,Ciney,Namur,Wallonia
+91034,50.24949,4.94323,Dinant,Namur,Wallonia
+91054,49.98443,4.90277,Gedinne,Namur,Wallonia
+91059,50.33702,5.13962,Hamois,Namur,Wallonia
+91064,50.36118,5.24816,Havelange,Namur,Wallonia
+91072,50.18605,5.00287,Houyet,Namur,Wallonia
+91103,50.26024,4.81223,Onhaye,Namur,Wallonia
+91114,50.15699,5.1692,Rochefort,Namur,Wallonia
+91120,50.29965,5.31878,Somme-Leuze,Namur,Wallonia
+91141,50.32531,4.94068,Yvoir,Namur,Wallonia
+91142,50.19499,4.82574,Hastière,Namur,Wallonia
+91143,49.85029,4.91578,Vresse-sur-Semois,Namur,Wallonia
+92003,50.48675,5.05782,Andenne,Namur,Wallonia
+92006,50.37547,4.993,Assesse,Namur,Wallonia
+92035,50.58661,4.89389,Eghezée,Namur,Wallonia
+92045,50.43498,4.75571,Floreffe,Namur,Wallonia
+92048,50.39322,4.68101,Fosses-la-Ville,Namur,Wallonia
+92054,50.42245,5.05342,Gesves,Namur,Wallonia
+92087,50.3232,4.67122,Mettet,Namur,Wallonia
+92094,50.46045,4.87258,Namen,Namur,Wallonia
+92097,50.43576,5.16638,Ohey,Namur,Wallonia
+92101,50.37521,4.82867,Profondeville,Namur,Wallonia
+92114,50.52667,4.60268,Sombreffe,Namur,Wallonia
+92137,50.44657,4.62073,Sambreville,Namur,Wallonia
+92138,50.55398,4.98722,Fernelmont,Namur,Wallonia
+92140,50.4717,4.67617,Jemeppe-sur-Sambre,Namur,Wallonia
+92141,50.52975,4.80978,La Bruyère,Namur,Wallonia
+92142,50.5543,4.70911,Gembloux,Namur,Wallonia
+93010,50.17953,4.43674,Cerfontaine,Namur,Wallonia
+93014,50.03787,4.48093,Couvin,Namur,Wallonia
+93018,50.14424,4.69904,Doische,Namur,Wallonia
+93022,50.25382,4.63116,Florennes,Namur,Wallonia
+93056,50.16922,4.58787,Philippeville,Namur,Wallonia
+93088,50.26661,4.43495,Walcourt,Namur,Wallonia
+93090,50.05385,4.62524,Viroinval,Namur,Wallonia

@@ -21,6 +21,8 @@ request. FastAPI autogenerates interactive docs at ``/docs`` and ``/redoc``.
 
 from __future__ import annotations
 
+import os
+import sys
 import time
 from contextlib import asynccontextmanager
 from typing import Any, Literal, Optional
@@ -30,7 +32,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, Field, ConfigDict
 
+# Repo root on the path so the API can import the shared cross-cutting packages
+# (geo/ priciness+geocode, invest/ ROI) that live above api/.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
 import predict as engine
+import explain as explainer
+import similar as comparables
 from features import (
     BINARY_META,
     CATEGORICAL_META,
@@ -40,7 +50,7 @@ from features import (
     PROVINCE_CENTROIDS,
 )
 
-API_VERSION = "1.0.0"
+API_VERSION = "2.0.0"
 START_TIME = time.time()
 
 
@@ -136,6 +146,26 @@ class PredictionResponse(BaseModel):
 class BatchRequest(BaseModel):
     market: Literal["sale", "rent"] = "sale"
     properties: list[PropertyFeatures]
+
+
+class ResolveRequest(BaseModel):
+    """Resolve a (partial) address to structured components + coordinates."""
+    street: str = Field(..., description="Street name (optionally with house number).")
+    city: Optional[str] = Field(None, description="City / municipality to disambiguate.")
+    house_number: Optional[str] = Field(None, description="House number, if known.")
+
+
+class InvestRequest(BaseModel):
+    """Inputs for the ROI projection (Invest tab)."""
+    purchase_price: float = Field(..., gt=0, description="Purchase price (EUR).")
+    monthly_rent: float = Field(..., ge=0, description="Expected monthly rent (EUR).")
+    refnis: Optional[int] = Field(None, description="Municipality NIS code (best signal).")
+    province: Optional[str] = Field(None, description="Province (fallback for yield/growth).")
+    region: Optional[str] = Field(None, description="Region (used for acquisition-cost rate).")
+    ptype: Literal["house", "apartment"] = "house"
+    scenario: Literal["hist", "cons", "base", "opt"] = "hist"
+    horizons: list[int] = Field(default_factory=lambda: [5, 10, 15, 20])
+    include_costs: bool = False
 
 
 # --------------------------------------------------------------------------- #
@@ -258,6 +288,143 @@ def predict_batch_route(request: BatchRequest) -> dict[str, Any]:
     except Exception as exc:  # pragma: no cover
         raise HTTPException(status_code=500, detail=f"Prediction failed: {exc}") from exc
     return {"market": request.market, "count": len(results), "predictions": results}
+
+
+# --------------------------------------------------------------------------- #
+# Explainability — why did the property get this price? (SHAP)
+# --------------------------------------------------------------------------- #
+@app.post("/explain", tags=["explain"])
+def explain_route(
+    features: PropertyFeatures,
+    market: Literal["sale", "rent"] = Query("sale"),
+    top: Optional[int] = Query(None, description="Keep only the N biggest drivers."),
+) -> dict[str, Any]:
+    """Per-feature € contributions to the price (SHAP), mapped to entered fields."""
+    try:
+        return explainer.explain_one(features.model_dump(exclude_none=True), market=market, top=top)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except Exception as exc:  # pragma: no cover
+        raise HTTPException(status_code=500, detail=f"Explain failed: {exc}") from exc
+
+
+# --------------------------------------------------------------------------- #
+# Comparables — five similar nearby properties
+# --------------------------------------------------------------------------- #
+@app.post("/similar", tags=["explain"])
+def similar_route(
+    features: PropertyFeatures,
+    market: Literal["sale", "rent"] = Query("sale"),
+    k: int = Query(5, ge=1, le=25),
+    prediction: Optional[float] = Query(None, description="Predicted price to bracket around."),
+) -> dict[str, Any]:
+    """Return up to ``k`` real comparable listings near the described property."""
+    feats = features.model_dump(exclude_none=True)
+    pred = prediction
+    if pred is None:
+        try:
+            pred = engine.predict_one(feats, market=market)["prediction"]
+        except Exception:  # noqa: BLE001 - comparables still work without it
+            pred = None
+    comps = comparables.similar_properties(feats, market=market, prediction=pred, k=k)
+    return {"market": market, "count": len(comps), "prediction": pred, "comparables": comps}
+
+
+# --------------------------------------------------------------------------- #
+# Priciness surface — point lookup + heatmap tiles
+# --------------------------------------------------------------------------- #
+def _surface(market: str):
+    from geo import priciness
+    return priciness.load(market)
+
+
+def _native(v):
+    """Coerce a numpy scalar to a plain Python scalar (JSON-safe)."""
+    return v.item() if hasattr(v, "item") else v
+
+
+@app.get("/priciness", tags=["geo"])
+def priciness_point(
+    lat: float = Query(..., ge=49.0, le=52.0),
+    lon: float = Query(..., ge=2.0, le=7.0),
+    market: Literal["sale", "rent"] = Query("sale"),
+) -> dict[str, Any]:
+    """Neighbourhood priciness (€/m², percentile, confidence, granularity) at a point."""
+    try:
+        r = _surface(market).lookup(lat, lon)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    return {"market": market, "lat": lat, "lon": lon,
+            **{k: _native(v) for k, v in r.items()}}
+
+
+@app.get("/priciness/tiles", tags=["geo"])
+def priciness_tiles(market: Literal["sale", "rent"] = Query("sale")) -> dict[str, Any]:
+    """Heatmap tiles (H3 hexagons) of €/m² for the whole country."""
+    try:
+        s = _surface(market)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    return {"market": market, "national_price_per_sqm": round(s.national_median, 1),
+            "count": len(s.tiles), "tiles": s.tiles}
+
+
+# --------------------------------------------------------------------------- #
+# Geocoding / address autocomplete (Geopunt + Photon)
+# --------------------------------------------------------------------------- #
+@app.get("/geocode/suggest", tags=["geo"])
+def geocode_suggest(
+    q: str = Query(..., min_length=2, description="Partial street/address text."),
+    limit: int = Query(6, ge=1, le=15),
+) -> dict[str, Any]:
+    """Address autocomplete suggestions (Geopunt for FL/BXL, Photon nationwide)."""
+    from geo import geocode
+    return {"query": q, "suggestions": geocode.suggest(q, limit=limit)}
+
+
+@app.post("/geocode/resolve", tags=["geo"])
+def geocode_resolve(req: ResolveRequest) -> dict[str, Any]:
+    """Resolve an address to structured components + coordinates (+ priciness)."""
+    from geo import geocode
+    resolved = geocode.resolve(req.street, city=req.city, house_number=req.house_number)
+    if not resolved:
+        raise HTTPException(status_code=404, detail="Address could not be resolved.")
+    # Enrich with priciness for both markets when coordinates are available.
+    lat, lon = resolved.get("latitude"), resolved.get("longitude")
+    if lat is not None and lon is not None:
+        pricey = {}
+        for market in MARKETS:
+            try:
+                pricey[market] = {k: _native(v) for k, v in _surface(market).lookup(lat, lon).items()}
+            except Exception:  # noqa: BLE001 - priciness is optional enrichment
+                pass
+        resolved["priciness"] = pricey
+    return resolved
+
+
+# --------------------------------------------------------------------------- #
+# Invest — ROI projection (rental yield + capital appreciation)
+# --------------------------------------------------------------------------- #
+@app.post("/invest", tags=["invest"])
+def invest_route(req: InvestRequest) -> dict[str, Any]:
+    """Project ROI (rent-only and rent+appreciation) with break-even + milestones."""
+    from invest import roi
+    try:
+        return roi.compute_roi(
+            purchase_price=req.purchase_price,
+            monthly_rent=req.monthly_rent,
+            refnis=req.refnis,
+            province=req.province,
+            region=req.region,
+            ptype=req.ptype,
+            horizons=tuple(req.horizons),
+            scenario=req.scenario,
+            include_costs=req.include_costs,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:  # pragma: no cover
+        raise HTTPException(status_code=500, detail=f"ROI computation failed: {exc}") from exc
 
 
 @app.exception_handler(404)

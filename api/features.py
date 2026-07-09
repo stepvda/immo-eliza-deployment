@@ -40,6 +40,7 @@ NUMERIC_FEATURES: list[str] = [
     "latitude",
     "longitude",
     "nearest_city_distance_km",
+    "neighbourhood_price_index",
 ]
 
 CATEGORICAL_FEATURES: list[str] = [
@@ -160,6 +161,7 @@ NUMERIC_META: dict[str, dict[str, Any]] = {
     "latitude":                   {"min": 49.4, "max": 51.6, "default": 50.85,"step": 0.001,"label": "Latitude",                 "unit": "°",   "help": "Auto-filled from province; override for a precise spot."},
     "longitude":                  {"min": 2.5,  "max": 6.5,  "default": 4.35, "step": 0.001,"label": "Longitude",                "unit": "°",   "help": "Auto-filled from province; override for a precise spot."},
     "nearest_city_distance_km":   {"min": 0,    "max": 60,   "default": 3,    "step": 1,   "label": "Distance to nearest city",  "unit": "km",  "help": "Distance to the nearest major city centre."},
+    "neighbourhood_price_index":  {"min": 0,    "max": 100,  "default": 50,   "step": 1,   "label": "Neighbourhood priciness",   "unit": "pct", "help": "€/m² percentile of the exact location (0=cheapest, 100=priciest). Auto-filled from the address; defaults to 50 (national median) when only a province is given."},
 }
 
 # Each binary field: (default, label, icon, help).

@@ -15,3 +15,10 @@ scipy==1.17.0
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 pydantic==2.10.4
+
+# --- new endpoints: explain (SHAP), similar/priciness/invest (parquet + geo),
+#     geocode (Geopunt/Photon). The image must be built from the repo root so
+#     geo/, invest/ and the data/ artifacts are available (see api/Dockerfile).
+shap==0.52.0
+pyarrow==24.0.0
+httpx==0.28.1

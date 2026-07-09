@@ -28,6 +28,7 @@ from __future__ import annotations
 
 import functools
 import os
+import sys
 from typing import Any, Iterable
 
 import joblib
@@ -41,6 +42,12 @@ from features import (
     default_property,
     region_for_province,
 )
+
+# Repo root on the path so we can import the shared ``geo`` package (priciness
+# surface) without depending on the working directory.
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
 # --------------------------------------------------------------------------- #
 # Paths & model registry
@@ -59,9 +66,13 @@ MODEL_FILES: dict[str, str] = {
 # immo-eliza-ml/models/evaluation_results.csv). Used to build a plausible
 # confidence band around each point estimate and to surface model quality
 # through the API. MAE = typical euro miss; R2 = share of variance explained.
+# Head-line tuned-XGBoost metrics on the held-out test set, for the 30-feature
+# pipeline that now includes the neighbourhood-priciness feature (from
+# ml/models/evaluation_results.csv). Accuracy is on par with the pre-priciness
+# model; the feature's payoff is exact-address pricing, the heatmap and SHAP.
 MODEL_METRICS: dict[str, dict[str, float]] = {
-    "sale": {"r2": 0.8123, "mae": 81840.0, "rmse": 184419.0},
-    "rent": {"r2": 0.6269, "mae": 253.72,  "rmse": 658.84},
+    "sale": {"r2": 0.8108, "mae": 81854.9, "rmse": 185185.8},
+    "rent": {"r2": 0.6215, "mae": 255.49,  "rmse": 663.66},
 }
 
 ALGORITHM = "XGBoost (tuned)"
@@ -112,11 +123,44 @@ def _fill_geo(record: dict[str, Any]) -> dict[str, Any]:
     return record
 
 
-def preprocess(records: Iterable[dict[str, Any]]) -> pd.DataFrame:
-    """Turn raw property dicts into the 29-column dataframe the pipeline expects.
+@functools.lru_cache(maxsize=None)
+def _load_surface(market: str):
+    """Load the priciness surface for a market (None if artifacts are absent)."""
+    try:
+        from geo import priciness
+        return priciness.load(market)
+    except Exception:  # noqa: BLE001 - surface is optional; fall back to defaults
+        return None
+
+
+def _fill_priciness(record: dict[str, Any], market: str, user_coords: bool) -> float:
+    """Neighbourhood priciness percentile for a record.
+
+    * exact address (user-supplied lat/lon) -> read the surface at that point,
+    * province only (lat/lon are province-centroid fills) -> the province's
+      median percentile (a fairer, coarser value than the exact centroid pixel),
+    * no surface / no province -> the record's existing value (defaults to 50).
+    """
+    surface = _load_surface(market)
+    current = record.get("neighbourhood_price_index", 50.0)
+    if surface is None:
+        return float(current if current is not None else 50.0)
+    lat, lon = record.get("latitude"), record.get("longitude")
+    if user_coords and lat is not None and lon is not None:
+        return float(surface.lookup(lat, lon)["percentile"])
+    pm = surface.prov_median.get(record.get("province"))
+    if pm is not None:
+        return float(surface.percentile_of(pm))
+    return float(current if current is not None else 50.0)
+
+
+def preprocess(records: Iterable[dict[str, Any]], market: str = "sale") -> pd.DataFrame:
+    """Turn raw property dicts into the feature dataframe the pipeline expects.
 
     * missing features are filled from :func:`features.default_property`,
     * geography (region/lat/long) is auto-completed from the province,
+    * ``neighbourhood_price_index`` is read off the priciness surface from the
+      exact address (or the province median when only a province is given),
     * amenity flags are coerced to clean 0/1 integers,
     * columns are returned in the exact order the pipeline was fitted on.
 
@@ -126,10 +170,15 @@ def preprocess(records: Iterable[dict[str, Any]]) -> pd.DataFrame:
     defaults = default_property()
     rows: list[dict[str, Any]] = []
     for raw in records:
+        user_coords = (raw.get("latitude") not in (None, "")
+                       and raw.get("longitude") not in (None, ""))
+        user_index = raw.get("neighbourhood_price_index") not in (None, "")
         record = {**defaults, **{k: v for k, v in raw.items() if v is not None}}
         record = _fill_geo(record)
         for flag in BINARY_FEATURES:
             record[flag] = int(bool(record.get(flag, 0)))
+        if not user_index:
+            record["neighbourhood_price_index"] = _fill_priciness(record, market, user_coords)
         rows.append({col: record.get(col) for col in FEATURE_COLUMNS})
     return pd.DataFrame(rows, columns=FEATURE_COLUMNS)
 
@@ -163,7 +212,7 @@ def predict_one(features: dict[str, Any], market: str = "sale") -> dict[str, Any
     ``interval`` (low/high band), ``unit`` and model ``metrics``.
     """
     model = load_model(market)  # raises MarketError / FileNotFoundError
-    X = preprocess([features])
+    X = preprocess([features], market)
     value = float(model.predict(X)[0])
     value = max(0.0, round(value, 2))
     metrics = MODEL_METRICS[market]
@@ -191,7 +240,7 @@ def predict(
         return predict_one(features, market)
 
     model = load_model(market)
-    X = preprocess(features)
+    X = preprocess(features, market)
     values = [max(0.0, round(float(v), 2)) for v in model.predict(X)]
     metrics = MODEL_METRICS[market]
     return [

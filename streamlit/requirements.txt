@@ -13,3 +13,11 @@ joblib==1.5.3
 pandas==2.2.3
 numpy==2.2.3
 scipy==1.17.0
+
+# neighbourhood-aware features run locally in the app (no API required):
+pydeck==0.9.3                 # priciness heatmap + red/blue map pins
+altair==5.5.0                # SHAP contribution + ROI charts
+streamlit-searchbox==0.1.24  # address autocomplete typeahead
+shap==0.52.0                 # SHAP explanations
+pyarrow==24.0.0              # read the canonical listings parquet
+httpx==0.28.1                # Geopunt / Photon geocoding client

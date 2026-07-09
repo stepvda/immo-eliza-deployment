@@ -1,0 +1,37 @@
+# Repo-root Docker context (the API image is built from here — see api/Dockerfile).
+# Keep the image lean: ship only api/, geo/, invest/ and the compact data/
+# artifacts they read; exclude everything heavy or build-time-only.
+
+# Python noise
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+.env
+*.log
+.DS_Store
+
+# Version control & CI
+.git/
+.github/
+
+# Training project, docs, notebooks, binaries — not needed to serve the API
+ml/
+docs/
+other/
+scripts/
+tests/
+streamlit/
+.streamlit/
+
+# Heavy / regenerable data partitions (the API only needs the compact merged
+# parquet + geo + invest CSVs, which ARE copied explicitly in the Dockerfile)
+data/listings/raw/
+data/listings/cache/
+data/listings/state.sqlite
+data/dummy/
+data/reference/
+data/geo/cache/

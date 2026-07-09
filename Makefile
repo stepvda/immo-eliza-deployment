@@ -5,7 +5,8 @@ VENV ?= .venv
 PY   := $(VENV)/bin/python
 PIP  := $(VENV)/bin/pip
 
-.PHONY: help venv install api streamlit test smoke docker-build docker-run clean
+.PHONY: help venv install api streamlit test smoke docker-build docker-run clean \
+        data priciness geo scrape eda retrain
 
 help:            ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -30,8 +31,27 @@ test:            ## Run the test suite
 smoke:           ## Smoke-test a running API (default: localhost:8010)
 	$(PY) scripts/smoke_test_api.py $(URL)
 
-docker-build:    ## Build the API Docker image
-	docker build -t immo-eliza-api ./api
+geo:             ## Build compact geo reference (centroids + municipality polygons)
+	$(PY) -m geo.build_reference
+
+data:            ## Seed the canonical listings store from the cleaned datasets
+	$(PY) -m scraper.seed
+
+priciness:       ## (Re)build the neighbourhood-priciness surfaces (sale + rent)
+	$(PY) -m geo.priciness
+
+scrape:          ## Run a small VALIDATION crawl (see scraper/README.md to scale up)
+	$(PY) -m scraper.run --sites immoweb,realo --market sale --max 50
+
+eda:             ## EDA + spatial (grouped) cross-validation of the shipped model
+	cd ml && ../$(PY) src/eda.py
+
+retrain:         ## Full ML rebuild: preprocess -> create -> train -> tune -> evaluate
+	cd ml && ../$(PY) src/preprocessing.py && ../$(PY) src/create_models.py \
+	  && ../$(PY) src/train_models.py && ../$(PY) src/tune_models.py && ../$(PY) src/evaluate.py
+
+docker-build:    ## Build the API Docker image (from the repo root context)
+	docker build -f api/Dockerfile -t immo-eliza-api .
 
 docker-run:      ## Run the API Docker image (host localhost:8010 -> container 8000)
 	docker run --rm -p 8010:8000 immo-eliza-api

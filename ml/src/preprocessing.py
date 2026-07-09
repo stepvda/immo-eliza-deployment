@@ -29,6 +29,7 @@ the training fold and applied identically at prediction time -- exactly the
 from __future__ import annotations
 
 import os
+import sys
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -41,6 +42,11 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 # Paths
 # --------------------------------------------------------------------------- #
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Repo root (one level above ml/) so we can import the shared ``geo`` package
+# that builds the neighbourhood-priciness feature.
+REPO_ROOT = os.path.dirname(PROJECT_ROOT)
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
 
 RAW_PATHS = {
     "sale": os.path.join(PROJECT_ROOT, "data", "in", "cleaned_sale_properties.csv"),
@@ -70,6 +76,11 @@ NUMERIC_FEATURES = [
     "latitude",
     "longitude",
     "nearest_city_distance_km",
+    # Neighbourhood priciness: the €/m² percentile (0-100) of the property's
+    # exact location for this market, from the adaptive spatial surface
+    # (geo/priciness.py). Computed leave-one-out at training time so a row never
+    # sees its own price. This is how location "priciness" enters the model.
+    "neighbourhood_price_index",
 ]
 
 # Low-cardinality text features -> "missing" category + one-hot encoding.
@@ -249,10 +260,38 @@ def trim_target_outliers(df: pd.DataFrame, low_q: float = 0.01,
     return df[(df[TARGET] >= low) & (df[TARGET] <= high)].reset_index(drop=True)
 
 
+def add_neighbourhood_index(df: pd.DataFrame, market: str,
+                            loo: bool = True) -> pd.DataFrame:
+    """Add the ``neighbourhood_price_index`` feature from the priciness surface.
+
+    Uses the exact address (``latitude``/``longitude``) to read the location's
+    €/m² percentile off the adaptive spatial surface. ``loo=True`` (used at
+    training time) excludes each row's own price from its own neighbourhood, so
+    the feature is leakage-free. Rows without coordinates fall back to the
+    national median percentile (50).
+    """
+    from geo import priciness  # repo-root import (see REPO_ROOT sys.path insert)
+
+    surface = priciness.load(market)
+    df = df.copy()
+    lat = pd.to_numeric(df.get("latitude"), errors="coerce")
+    lon = pd.to_numeric(df.get("longitude"), errors="coerce")
+    ok = lat.notna() & lon.notna()
+    idx = pd.Series(50.0, index=df.index)
+    if ok.any():
+        res = surface.index_batch(lat[ok].to_numpy(), lon[ok].to_numpy(), loo=loo)
+        idx.loc[ok] = res["percentile"]
+    df["neighbourhood_price_index"] = idx.astype(float)
+    return df
+
+
 def process_market(market: str) -> dict:
     """Clean one market, split train/test, save the cleaned splits to disk."""
     raw = pd.read_csv(RAW_PATHS[market])
     cleaned = clean_data(raw, market)
+    # Attach the neighbourhood-priciness feature from the exact coordinates
+    # (leave-one-out so a row never sees its own price).
+    cleaned = add_neighbourhood_index(cleaned, market, loo=True)
 
     train_df, test_df = train_test_split(
         cleaned, test_size=TEST_SIZE, random_state=RANDOM_STATE

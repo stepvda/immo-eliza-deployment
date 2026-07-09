@@ -27,3 +27,10 @@ scratchpad/
 
 # Exercise brief scratch (kept out of the clean repo)
 other/
+
+# Data-pipeline transients (regenerable; keep only the canonical merged parquet
+# + reference artifacts, which ARE committed for the deployments to use).
+data/listings/cache/
+data/listings/raw/
+data/listings/state.sqlite
+data/geo/cache/

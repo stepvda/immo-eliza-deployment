@@ -71,3 +71,55 @@ def test_predict_batch(client):
 def test_empty_batch_rejected(client):
     r = client.post("/predict/batch", json={"market": "sale", "properties": []})
     assert r.status_code == 422
+
+
+# --------------------------------------------------------------------------- #
+# Neighbourhood-aware routes
+# --------------------------------------------------------------------------- #
+_PROP = {"livable_surface": 85, "bedrooms": 2, "property_type": "flat",
+         "province": "Brussels", "epc": "C", "latitude": 50.846, "longitude": 4.352}
+
+
+def test_schema_exposes_priciness_feature(client):
+    numeric = client.get("/schema").json()["numeric"]
+    assert "neighbourhood_price_index" in numeric
+
+
+def test_explain_route(client):
+    r = client.post("/explain", params={"market": "sale", "top": 6}, json=_PROP)
+    assert r.status_code == 200
+    body = r.json()
+    assert body["contributions"] and len(body["contributions"]) <= 6
+    assert {"feature", "value_eur", "direction"} <= set(body["contributions"][0])
+
+
+def test_similar_route(client):
+    r = client.post("/similar", params={"market": "sale"}, json=_PROP)
+    assert r.status_code == 200
+    body = r.json()
+    assert 1 <= body["count"] <= 5
+    assert all(c["price"] > 0 for c in body["comparables"])
+
+
+def test_priciness_point_and_tiles(client):
+    p = client.get("/priciness", params={"lat": 50.846, "lon": 4.352, "market": "sale"}).json()
+    assert 0 <= p["percentile"] <= 100 and p["price_per_sqm"] > 0
+    t = client.get("/priciness/tiles", params={"market": "sale"}).json()
+    assert t["count"] > 50 and t["national_price_per_sqm"] > 0
+
+
+def test_invest_route(client):
+    r = client.post("/invest", json={"purchase_price": 300000, "monthly_rent": 1200,
+                                     "province": "Brussels", "region": "Brussels",
+                                     "ptype": "apartment", "scenario": "hist"})
+    assert r.status_code == 200
+    body = r.json()
+    assert body["gross_yield_pct"] > 0 and body["series"]
+    assert "10" in body["milestones"] or 10 in body["milestones"]
+
+
+def test_geocode_suggest_offline(client, monkeypatch):
+    monkeypatch.setenv("IMMO_GEOCODE_OFFLINE", "1")
+    r = client.get("/geocode/suggest", params={"q": "Veldstraat Gent"})
+    assert r.status_code == 200
+    assert r.json()["suggestions"] == []
