@@ -115,10 +115,27 @@ def _default_source_priority() -> dict[str, float]:
 
 
 def _survivor(cluster: list[dict], source_priority: dict[str, float]) -> dict:
-    return max(
+    """The richest record in the cluster, with its **null fields coalesced** from
+    the duplicates (higher-priority sources first). Collapsing duplicates should
+    not throw away information the winner happens to lack — most importantly a
+    ``url`` back to the listing, but also any other field only a sibling filled.
+    """
+    best = max(
         cluster,
         key=lambda r: (count_filled(r), source_priority.get(r.get("source"), 0.0)),
     )
+    if len(cluster) == 1:
+        return best
+    merged = dict(best)
+    others = sorted(
+        (r for r in cluster if r is not best),
+        key=lambda r: source_priority.get(r.get("source"), 0.0), reverse=True,
+    )
+    for rec in others:
+        for key, value in rec.items():
+            if merged.get(key) in (None, "") and value not in (None, ""):
+                merged[key] = value
+    return merged
 
 
 def dedupe(records: list[dict], source_priority: Optional[dict[str, float]] = None):

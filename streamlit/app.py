@@ -206,7 +206,7 @@ def dataset_stats() -> dict:
     predates ``TRAIN_COUNTS`` — that must not take down the whole app, so every
     lookup is guarded and missing values fall back to ``None``.
     """
-    out = {"sale": {"train": None, "pool": None}, "rent": {"train": None, "pool": None}}
+    out = {m: {"total": None, "train": None, "pool": None} for m in ("sale", "rent")}
     try:
         train_counts = getattr(_engine(), "TRAIN_COUNTS", {}) or {}
     except Exception:  # noqa: BLE001
@@ -214,9 +214,11 @@ def dataset_stats() -> dict:
     for m in ("sale", "rent"):
         out[m]["train"] = train_counts.get(m)
         try:
-            out[m]["pool"] = _comparables().pool_size(m)
+            comp = _comparables()
+            out[m]["total"] = comp.total_size(m)
+            out[m]["pool"] = comp.pool_size(m)
         except Exception:  # noqa: BLE001
-            out[m]["pool"] = None
+            pass
     return out
 
 
@@ -277,14 +279,16 @@ with st.sidebar:
         "includes a **neighbourhood-priciness** feature — the €/m² percentile of the "
         "exact address, from an adaptive spatial surface built on real listings.")
     _stats = dataset_stats()
-    _ts, _tr = _stats["sale"]["train"], _stats["rent"]["train"]
-    _ps, _pr = _stats["sale"]["pool"], _stats["rent"]["pool"]
+    _s, _r = _stats["sale"], _stats["rent"]
     _lines = []
-    if _ts and _tr:
-        _lines.append(f"- **Trained on** {_ts:,} sale + {_tr:,} rent listings")
-    if _ps and _pr:
-        _lines.append(f"- **Comparables pool** (real listings for similar properties): "
-                      f"{_ps:,} sale · {_pr:,} rent")
+    if _s["total"] and _r["total"]:
+        _lines.append(f"- **📥 Input data (total):** {_s['total']:,} sale + {_r['total']:,} rent properties")
+    if _s["train"] and _r["train"]:
+        _lines.append(f"- **🧠 Model trained on:** {_s['train']:,} sale + {_r['train']:,} rent "
+                      f"(80% training split)")
+    if _s["pool"] and _r["pool"]:
+        _lines.append(f"- **🏘️ Comparables pool:** {_s['pool']:,} sale + {_r['pool']:,} rent "
+                      f"(usable for similar-property search)")
     if _lines:
         st.markdown("### 📊  Data")
         st.markdown("\n".join(_lines))
@@ -533,9 +537,6 @@ def render_comparables(comps: list[dict], market: str) -> None:
                 help="Open the property on the source immo site (Immoweb / Immovlan)."),
         },
     )
-    if not any(c.get("url") for c in comps):
-        st.caption("↳ Source links appear as the scraped Immoweb/Immovlan listings "
-                   "grow the comparables pool (the original seed listings have no URL).")
 
 
 # --------------------------------------------------------------------------- #

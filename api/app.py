@@ -250,15 +250,17 @@ def schema() -> dict[str, Any]:
 @app.get("/metrics", tags=["meta"])
 def metrics() -> dict[str, Any]:
     """Held-out test-set metrics, training sizes and comparables-pool sizes."""
-    pools = {}
+    pools, totals = {}, {}
     for market in MARKETS:
         try:
             pools[market] = comparables.pool_size(market)
-        except Exception:  # noqa: BLE001 - pool is optional metadata
-            pools[market] = None
+            totals[market] = comparables.total_size(market)
+        except Exception:  # noqa: BLE001 - counts are optional metadata
+            pools[market] = totals.get(market)
     return {
         "model": engine.ALGORITHM,
         "markets": engine.MODEL_METRICS,
+        "input_data_counts": totals,
         "train_counts": engine.TRAIN_COUNTS,
         "pool_sizes": pools,
     }

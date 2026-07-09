@@ -48,8 +48,18 @@ OUT_COLS = [
 
 
 def pool_size(market: str) -> int:
-    """Number of usable listings the comparables for ``market`` are drawn from."""
+    """Number of usable listings the comparables for ``market`` are drawn from
+    (those with a price and coordinates)."""
     return int(len(_listings(market)))
+
+
+@functools.lru_cache(maxsize=None)
+def total_size(market: str) -> int:
+    """Total properties in the input data store for ``market`` (all rows)."""
+    path = os.path.join(LISTINGS_DIR, f"{market}.parquet")
+    if not os.path.exists(path):
+        return 0
+    return int(len(pd.read_parquet(path, columns=["price"])))
 
 
 @functools.lru_cache(maxsize=None)
@@ -99,6 +109,14 @@ def similar_properties(
         return []
 
     df = df.copy()
+    # The same physical property can appear as both a seed and a scraped row
+    # (they share a listing id / URL but differed on the store's blocking key), so
+    # collapse by URL first — otherwise "5 similar" could show one property twice.
+    # URL-less rows (if any) are kept as-is, never collapsed together.
+    if "url" in df.columns:
+        with_url = df[df["url"].notna()].drop_duplicates(subset="url")
+        without_url = df[df["url"].isna()]
+        df = pd.concat([with_url, without_url], ignore_index=True) if len(without_url) else with_url
     df["distance_km"] = _haversine_km(lat0, lon0, df["latitude"].to_numpy(),
                                       df["longitude"].to_numpy())
 

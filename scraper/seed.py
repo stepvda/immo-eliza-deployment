@@ -30,9 +30,20 @@ CLEANED = {
     "rent": REPO_ROOT / "ml" / "data" / "in" / "cleaned_rent_properties.csv",
 }
 XWALK = REPO_ROOT / "data" / "invest" / "nis_postal_crosswalk.csv"
+# property_id -> source listing URL, recovered from the original scrape (built
+# from the analysis repo's forsale/torent raw exports). Lets every seed listing
+# keep a link back to its Immovlan/Immoweb page (the cleaned CSV dropped the URL).
+SEED_URLS = REPO_ROOT / "data" / "listings" / "source_urls.csv"
 
 # cleaned-CSV column -> canonical column (identical names omitted).
 RENAME = {"property_id": "listing_id"}
+
+
+def _url_map() -> dict[str, str]:
+    if not SEED_URLS.exists():
+        return {}
+    m = pd.read_csv(SEED_URLS, usecols=["property_id", "url"])
+    return dict(zip(m["property_id"].astype(str), m["url"]))
 
 
 def _crosswalk_maps():
@@ -53,10 +64,11 @@ def seed_market(market: str) -> dict:
     df = df.rename(columns=RENAME)
 
     df["source"] = "seed"
-    df["url"] = None
     df["market"] = market
     df["scraped_at"] = None
     df["house_number"] = None
+    # Recover each listing's original source URL from its property_id.
+    df["url"] = df["listing_id"].astype(str).map(_url_map())
 
     # Fill refnis / municipality / province / region from the postal crosswalk
     # (authoritative), falling back to whatever the cleaned CSV already carries.
