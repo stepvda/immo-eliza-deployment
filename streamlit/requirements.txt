@@ -3,7 +3,7 @@
 # pipelines load cleanly when the app runs in local-model (offline) mode.
 # Python 3.13.
 
-streamlit==1.41.1
+streamlit==1.54.0
 requests==2.32.3
 
 # needed to load & score the bundled model locally (offline fallback)
