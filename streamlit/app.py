@@ -199,15 +199,24 @@ def geocode_search(query: str) -> list[tuple[str, str]]:
 
 @st.cache_data(show_spinner=False)
 def dataset_stats() -> dict:
-    """Per-market training size + comparables-pool size, for display in the UI."""
-    eng, comp = _engine(), _comparables()
-    out = {}
+    """Per-market training size + comparables-pool size, for display in the UI.
+
+    Defensive by design: it must **never raise**. This panel is optional, and on
+    Streamlit Cloud a hot-reload can hand back a stale ``predict`` module that
+    predates ``TRAIN_COUNTS`` — that must not take down the whole app, so every
+    lookup is guarded and missing values fall back to ``None``.
+    """
+    out = {"sale": {"train": None, "pool": None}, "rent": {"train": None, "pool": None}}
+    try:
+        train_counts = getattr(_engine(), "TRAIN_COUNTS", {}) or {}
+    except Exception:  # noqa: BLE001
+        train_counts = {}
     for m in ("sale", "rent"):
+        out[m]["train"] = train_counts.get(m)
         try:
-            pool = comp.pool_size(m)
+            out[m]["pool"] = _comparables().pool_size(m)
         except Exception:  # noqa: BLE001
-            pool = None
-        out[m] = {"train": eng.TRAIN_COUNTS.get(m), "pool": pool}
+            out[m]["pool"] = None
     return out
 
 
@@ -268,11 +277,17 @@ with st.sidebar:
         "includes a **neighbourhood-priciness** feature — the €/m² percentile of the "
         "exact address, from an adaptive spatial surface built on real listings.")
     _stats = dataset_stats()
-    st.markdown("### 📊  Data")
-    st.markdown(
-        f"- **Trained on** {_stats['sale']['train']:,} sale + {_stats['rent']['train']:,} rent listings\n"
-        f"- **Comparables pool** (real listings to draw similar properties from): "
-        f"{_stats['sale']['pool']:,} sale · {_stats['rent']['pool']:,} rent")
+    _ts, _tr = _stats["sale"]["train"], _stats["rent"]["train"]
+    _ps, _pr = _stats["sale"]["pool"], _stats["rent"]["pool"]
+    _lines = []
+    if _ts and _tr:
+        _lines.append(f"- **Trained on** {_ts:,} sale + {_tr:,} rent listings")
+    if _ps and _pr:
+        _lines.append(f"- **Comparables pool** (real listings for similar properties): "
+                      f"{_ps:,} sale · {_pr:,} rent")
+    if _lines:
+        st.markdown("### 📊  Data")
+        st.markdown("\n".join(_lines))
     st.caption("Immo Eliza · educational project · estimates, not valuations.")
 
 
