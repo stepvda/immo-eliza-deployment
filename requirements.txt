@@ -22,7 +22,7 @@ pydantic==2.10.4
 
 # --- frontend (Streamlit) ---
 streamlit==1.41.1
-requests==2.32.3
+requests==2.33.0
 pydeck==0.9.3                 # priciness heatmap (deck.gl) + map pins
 altair==5.5.0                # SHAP + ROI charts
 streamlit-searchbox==0.1.24  # address autocomplete typeahead
