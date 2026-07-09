@@ -54,17 +54,34 @@ def pool_size(market: str) -> int:
 
 
 @functools.lru_cache(maxsize=None)
-def total_size(market: str) -> int:
-    """Total properties in the input data store for ``market`` (all rows)."""
-    path = os.path.join(LISTINGS_DIR, f"{market}.parquet")
+def _total_size_at(market: str, _mtime_key: float) -> int:
+    path = _market_parquet(market)
     if not os.path.exists(path):
         return 0
     return int(len(pd.read_parquet(path, columns=["price"])))
 
 
+def total_size(market: str) -> int:
+    """Total properties in the input data store for ``market`` (all rows)."""
+    return _total_size_at(market, _mtime(market))
+
+
+def _market_parquet(market: str) -> str:
+    return os.path.join(LISTINGS_DIR, f"{market}.parquet")
+
+
+def _mtime(market: str) -> float:
+    """Modification time of a market's parquet (0 if absent). Used as a cache key
+    so the in-memory listings invalidate automatically when the file changes —
+    e.g. after a redeploy ships a newer dataset, so the app never serves a stale,
+    url-less pool."""
+    path = _market_parquet(market)
+    return os.path.getmtime(path) if os.path.exists(path) else 0.0
+
+
 @functools.lru_cache(maxsize=None)
-def _listings(market: str) -> pd.DataFrame:
-    path = os.path.join(LISTINGS_DIR, f"{market}.parquet")
+def _listings_at(market: str, _mtime_key: float) -> pd.DataFrame:
+    path = _market_parquet(market)
     if not os.path.exists(path):
         return pd.DataFrame(columns=OUT_COLS)
     df = pd.read_parquet(path)
@@ -73,6 +90,10 @@ def _listings(market: str) -> pd.DataFrame:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors="coerce")
     return df.dropna(subset=["price", "latitude", "longitude"]).reset_index(drop=True)
+
+
+def _listings(market: str) -> pd.DataFrame:
+    return _listings_at(market, _mtime(market))
 
 
 def _haversine_km(lat0: float, lon0: float, lat: np.ndarray, lon: np.ndarray) -> np.ndarray:
