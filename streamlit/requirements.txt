@@ -4,7 +4,7 @@
 # Python 3.13.
 
 streamlit==1.41.1
-requests==2.32.3
+requests==2.33.0
 
 # needed to load & score the bundled model locally (offline fallback)
 scikit-learn==1.8.0
